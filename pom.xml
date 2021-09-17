@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>BallOnPlate</groupId>
+  <artifactId>WebApp</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  <name>BallOnPlate : WebApp</name>
+  <description>Provides a Back- and Frontend to communicate with the project</description>
+  
+  
+  
+  <properties>
+        <node.version>v12.14.1</node.version>
+        <npm.version>6.13.4</npm.version>
+	  	<failOnMissingWebXml>false</failOnMissingWebXml>
+  </properties>
+  
+  <dependencies>
+      <dependency>
+	    <version>2.0.2</version>
+            <groupId>jakarta.enterprise</groupId>
+            <artifactId>jakarta.enterprise.cdi-api</artifactId>
+            <scope>provided</scope>
+      </dependency>
+      
+	  <dependency>
+ 		   <groupId>org.liquibase</groupId>
+  		   <artifactId>liquibase-cdi</artifactId>
+ 		   <version>4.4.3</version>
+		</dependency>
+		<!-- Annotation processor to generate the JPA metamodel classes for
+            typesafe criteria queries -->
+        <dependency>
+	    <version>5.3.20.Final</version>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jpamodelgen</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Jakarta Activation needed for JPA model generation -->
+        <dependency>
+	    <version>1.2.2</version>
+            <groupId>com.sun.activation</groupId>
+            <artifactId>jakarta.activation</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Bean Validation Implementation 
+             Provides portable constraints such as @Email 
+             Hibernate Validator is shipped in JBoss EAP -->
+        <dependency>
+	    <version>6.0.22.Final</version>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Import the JPA API, we use provided scope as the API is included in
+            JBoss EAP -->
+        <dependency>
+	    <version>2.2.3</version>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Import the JSF API, we use provided scope as the API is included in
+            JBoss EAP -->
+        <dependency>
+	    <version>3.0.0.SP04</version>
+            <groupId>org.jboss.spec.javax.faces</groupId>
+            <artifactId>jboss-jsf-api_2.3_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Import the JAX-RS API, we use provided scope as the API is included
+            in JBoss EAP -->
+        <dependency>
+	    <version>2.0.1.Final</version>
+            <groupId>org.jboss.spec.javax.ws.rs</groupId>
+            <artifactId>jboss-jaxrs-api_2.1_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- your own standard logging dependencies -->
+		<dependency>
+    		<groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-api</artifactId>
+		    <version>1.7.5</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-log4j12</artifactId><!-- or log4j2 or logback or whatever-->
+		    <version>1.7.5</version>
+		</dependency>
+
+		<!-- special dependency to fix liquibase's logging fetish -->
+		<dependency>
+		    <groupId>com.mattbertolini</groupId>
+		    <artifactId>liquibase-slf4j</artifactId>
+		    <version>1.2.1</version>
+		</dependency>
+  </dependencies>
+  
+  <build>
+    <finalName>BallOnPlate</finalName>
+    <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.3</version>
+            <configuration>
+               <source>7</source>
+               <target>7</target>
+               <compilerArgument>-Xlint:all</compilerArgument>
+               <showWarnings>true</showWarnings>
+               <showDeprecation>true</showDeprecation>
+            </configuration>
+         </plugin>
+         
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.3.1</version>
+            <configuration>
+            <failOnMissingWebXml>false</failOnMissingWebXml>
+            </configuration>
+         </plugin>
+    </plugins>
+  </build>
+</project>
