@@ -152,10 +152,10 @@
         <subsystem xmlns="urn:jboss:domain:datasources:6.0">
             <datasources>
                 <datasource jndi-name="java:jboss/datasources/BallOnPlateDS" pool-name="BallOnPlateDS" enabled="true" use-java-context="true" statistics-enabled="${wildfly.datasources.statistics-enabled:${wildfly.statistics-enabled:false}}">
-                    <connection-url>jdbc:postgresql://localhost:5432/BallOnPlateDS</connection-url>
+                    <connection-url>jdbc:postgresql://localhost:5432/ballonplateds</connection-url>
                     <driver>postgresql-42.2.23.jar</driver>
                     <security>
-                        <user-name>BallOnPlateDSOwner</user-name>
+                        <user-name>pi</user-name>
                         <password>BallOnPlateDSOwner</password>
                     </security>
                 </datasource>

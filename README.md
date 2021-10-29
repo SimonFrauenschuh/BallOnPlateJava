@@ -1,16 +1,55 @@
 # BallOnPlateJava
-## Contains the Code / Workflow for the frontend and the Web Application of the BallOnPlate Project. Written in Java EE
+**Contains the Code / Workflow for the frontend and the Web Application of the BallOnPlate Project. Written in Java EE**
 
-### Install Wildfly as standalone
-1. Navigate to the folder, where "wildfly-install.sh" is located
+## Install Wildfly as standalone
+1. Navigate to the BallOnPlateJava", where "wildfly-install.sh" is located
+	Alternative download from "https://gist.github.com/sukharevd/6087988"
 2. Execute "sudo bash wildfly-install.sh"
 3. Check status via "sudo systemctl status wildfly"
 4. Navigate to standalone/configuration and change the standalone.xml to the one, provided in Git
-5. Move the .war file to standalone/deployments
-6. Start the service via "sudo service wildfly start"
-	Alternative "sudo systemctl enable wildfly"
-	Alternative "sudo systemctl enable wildfly.service"
-7. Restart the service via "sudo systemctl restart wildfly"
-	Alternative "sudo systemctl restart wildfly.service"
+5. Navigate to the bin-folder and execute "sudo bash add-user.sh"
+6. Start the server:
+
+	**Option 1**
+	1. Stop the service via "sudo systemctl stop wildfly"
+	2. Navigate to the bin-folder and execute "sudo bash standalone.sh"
+	3. !Don't close the cmd-line!
+
+	**Option 2**
+	1. Start the service via "sudo service wildfly start"
+		Alternative "sudo systemctl enable wildfly"
+		Alternative "sudo systemctl enable wildfly.service"
+	2. Restart the service via "sudo systemctl restart wildfly"
+		Alternative "sudo systemctl restart wildfly.service"
 	
-### Install PostgreSQL
+7. Add the postgresql-Driver
+- go to the adress, that is shown in the cmd-line (like "http://127.0.0.1:9990/console") and navigate to "Deployments"
+- Klick on the "+" and select the driver "postgresql-42.2.23", that is provided in Git "BallOnPlateJava/src/main/resources"
+- Klick on "next", make sure, that the driver is enabled and "Finish".
+- Navigate to "Configuration" - "Subsystems" - "Datasources & Drivers" - "JDBC Drivers" and you should see a Driver called "postgresql-42.2.23.jar"
+
+	
+## Install PostgreSQL
+1. Execute "sudo apt update" and "sudo apt full-upgrade"
+1. Execute "sudo apt install postgresql" to install
+2. Execute "sudo su postgres" to change to superuser
+3. Execute "creatuser pi -p --interactive" to give your Raspberry admin-rights
+	Use Passwort BallOnPlateDSOwner
+4. Execute "psql"
+5. In the PostgreS cmd-line, execute "CREATE DATABASE pi;"
+6. Execute "\q" and "exit"
+7. Now go into the Postgres-cmd-line "psql"
+8. Execute "CREATE DATABASE BallOnPlateDS;"
+9. Connect to the database via "\connect ballonplateds;" to check, if all worked well
+
+## "Start" the application
+1. Go to "BallOnPlateJava/target" and copy the file "BallOnPlate.war"
+2. Go to "wildfly-22.0.1.Final/standalone/deployments" and paste the file
+3. There should be something going on in the cmd-line, where you started the server
+	"WFLYSRV0010: Deployed "BallOnPlate.war" (runtime-name : "BallOnPlate.war")" is good, errors are bad
+4. Go to the web-console - "Deployments". There you should see "BallOnPlate.war".
+5. To open the application: click on "BallOnPlate.war" and use the the link provided (Context root)
+
+
+### Note!
+**This is a RESTful application, which means, that it does nothing, until you open it. Your connection will be closed, after you close the tab, but the data will be safe (Stateless Programming style). So you're device-independent, but you can cause unexpected behaviour if more than one client is connected!!**
