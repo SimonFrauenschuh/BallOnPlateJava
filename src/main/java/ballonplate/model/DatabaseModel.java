@@ -30,11 +30,11 @@ public class DatabaseModel implements Serializable{
     private Long id;
 	
 	@NotNull
-    @Range(min = 0, max = 60)
+    @Range(min = 0, max = 2000)
     private double positionX;
 	
 	@NotNull
-    @Range(min = 0, max = 60)
+    @Range(min = 0, max = 2000)
     private double positionY;
 	
 	@NotNull

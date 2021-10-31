@@ -75,22 +75,32 @@
    	     	</h:column>
     	</h:dataTable>
     	 
-    	<!--  -->
+    	<!-- -->
     	<h2>Visualization</h2>
-    	 
-    	<canvas id="visualization" width="400" height="300" style="border:1px solid #000000;">
     	
+    		
+        <ui:param name="posX" value="#{DatabaseModelRepository.getPosX()}" />
+        <ui:param name="posY" value="#{DatabaseModelRepository.getPosY()}" />
+    	
+    	<canvas id="visualization" width="400" height="300" style="border:1px solid #000000;">
     		<script language="JavaScript">	
-		
-			var c = document.getElementById("visualization");
+			
+    		var posiX = document.getElementsByName("posX").value;
+    		var posiY = document.getElementsByName("posY").value;
+    		
+    		var c = document.getElementById("visualization");
 			var ctx = c.getContext("2d");
 			ctx.beginPath();
-			ctx.arc(60,60,15,0,2*Math.PI); 
+			ctx.arc(posiX,posiY,15,0,2*Math.PI); 
 			ctx.stroke();
+						
 			</script>
 		</canvas>
-		
-		
+		<p>
+		<h:outputText value="PosX: #{posX} "/>
+		<h:outputText value="PosY: #{posY}"/>
+		</p>	
+    		
     	
     </ui:define>
 </ui:composition>
