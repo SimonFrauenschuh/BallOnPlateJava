@@ -73,6 +73,24 @@
    	     			#{_databaseModel.positionY}
    	     		</div>
    	     	</h:column>
-    	 </h:dataTable>
+    	</h:dataTable>
+    	 
+    	<!--  -->
+    	<h2>Visualization</h2>
+    	 
+    	<canvas id="visualization" width="400" height="300" style="border:1px solid #000000;">
+    	
+    		<script language="JavaScript">	
+		
+			var c = document.getElementById("visualization");
+			var ctx = c.getContext("2d");
+			ctx.beginPath();
+			ctx.arc(60,60,15,0,2*Math.PI); 
+			ctx.stroke();
+			</script>
+		</canvas>
+		
+		
+    	
     </ui:define>
 </ui:composition>
