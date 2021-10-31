@@ -12,6 +12,7 @@ import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -19,6 +20,7 @@ import javax.persistence.criteria.Root;
 
 import ballonplate.model.DatabaseModel;
 
+@Named("databaseModelRepository")
 @ApplicationScoped
 public class DatabaseModelRepository {
 
@@ -35,5 +37,13 @@ public class DatabaseModelRepository {
 		Root<DatabaseModel> databaseModel = criteria.from(DatabaseModel.class);
 		criteria.select(databaseModel).orderBy(cb.asc(databaseModel.get("id")));
 		return em.createQuery(criteria).getResultList();
+	}
+	
+	double getPosX(long id) {
+		return findById(id).getPositionX();
+	}
+
+	double getPosY(long id) {
+		return findById(id).getPositionY();
 	}
 }
