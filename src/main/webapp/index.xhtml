@@ -78,15 +78,19 @@
     	<!-- -->
     	<h2>Visualization</h2>
     	
-    		
-        <ui:param name="posX" value="#{DatabaseModelRepository.getPosX()}" />
-        <ui:param name="posY" value="#{DatabaseModelRepository.getPosY()}" />
+    		       
+        <div id="posX" data-variableid1="#{DatabaseModelRepository.getPosX()}"></div>
+        <div id="posY" data-variableid2="#{DatabaseModelRepository.getPosY()}"></div>
+
     	
     	<canvas id="visualization" width="400" height="300" style="border:1px solid #000000;">
     		<script language="JavaScript">	
-			
-    		var posiX = document.getElementsByName("posX").value;
-    		var posiY = document.getElementsByName("posY").value;
+    		
+    		var posX = document.getElementById("posX");
+    		var posY = document.getElementById("posY");
+    		
+    		var posiX = posX.getAttribute('data-variableid1');	//extracts value from Element 
+    		var posiY = posY.getAttribute('data-variableid2');
     		
     		var c = document.getElementById("visualization");
 			var ctx = c.getContext("2d");
@@ -95,12 +99,6 @@
 			ctx.stroke();
 						
 			</script>
-		</canvas>
-		<p>
-		<h:outputText value="PosX: #{posX} "/>
-		<h:outputText value="PosY: #{posY}"/>
-		</p>	
-    		
-    	
+		</canvas> 		
     </ui:define>
 </ui:composition>
