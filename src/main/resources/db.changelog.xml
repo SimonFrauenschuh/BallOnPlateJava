@@ -26,4 +26,13 @@
     <changeSet author="sfrauenschuh (generated)" id="1626763182512-2">
         <createSequence cacheSize="1" cycle="false" incrementBy="1" maxValue="9223372036854775807" minValue="1" sequenceName="hibernate_sequence" startValue="1"/>
     </changeSet>
+    
+    <changeSet author="sfrauenschuh (generated)" id="1626763182512-3">
+    	<insert tableName="databasemodel">  
+        	<column  name="id"  value="1"/>
+        	<column  name="positionx"  value="200"/>
+        	<column  name="positiony"  value="150"/>
+        	<column  name="action"  value="0"/>
+    	</insert>  
+    </changeSet>
 </databaseChangeLog>
