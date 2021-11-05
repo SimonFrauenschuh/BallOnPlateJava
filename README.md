@@ -6,7 +6,7 @@
 	Alternative download from "https://gist.github.com/sukharevd/6087988"
 2. Execute "sudo bash wildfly-install.sh"
 3. Check status via "sudo systemctl status wildfly"
-4. Navigate to standalone/configuration and change the standalone.xml to the one, provided in Git
+4. Navigate to the new downloaded folder (not the one from GIT) to standalone/configuration and change the standalone.xml to the one, provided in Git
 5. Navigate to the bin-folder and execute "sudo bash add-user.sh"
 6. Start the server:
 
@@ -23,7 +23,7 @@
 		Alternative "sudo systemctl restart wildfly.service"
 	
 7. Add the postgresql-Driver
-- go to the adress, that is shown in the cmd-line (like "http://127.0.0.1:9990/console") and navigate to "Deployments"
+- go to the adress, that is shown after wildfly-startup in the cmd-line (like "http://127.0.0.1:9990/console") and navigate to "Deployments"
 - Klick on the "+" and select the driver "postgresql-42.2.23", that is provided in Git "BallOnPlateJava/src/main/resources"
 - Klick on "next", make sure, that the driver is enabled and "Finish".
 - Navigate to "Configuration" - "Subsystems" - "Datasources & Drivers" - "JDBC Drivers" and you should see a Driver called "postgresql-42.2.23.jar"
@@ -43,7 +43,7 @@
 9. Connect to the database via "\connect ballonplateds;" to check, if all worked well
 
 ## "Start" the application
-1. Go to "BallOnPlateJava/target" and copy the file "BallOnPlate.war"
+1. Go to "BallOnPlateJava/target" and copy the file "BallOnPlate.war", that is provided in GIT
 2. Go to "wildfly-22.0.1.Final/standalone/deployments" and paste the file
 3. There should be something going on in the cmd-line, where you started the server
 	"WFLYSRV0010: Deployed "BallOnPlate.war" (runtime-name : "BallOnPlate.war")" is good, errors are bad
