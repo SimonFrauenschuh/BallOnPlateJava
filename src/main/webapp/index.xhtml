@@ -95,9 +95,12 @@
     		
     		var c = document.getElementById("visualization");
 			var ctx = c.getContext("2d");
+			ctx.fillStyle = "black";
 			ctx.beginPath();
-			ctx.arc(posiX,posiY,15,0,2*Math.PI); 
-			ctx.stroke();
+			ctx.arc(posiX,posiY,15,0,2*Math.PI);
+			ctx.fill();
+			
+			
 						
 			</script>
 		</canvas>
