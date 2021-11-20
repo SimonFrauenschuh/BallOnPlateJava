@@ -35,11 +35,7 @@ import ballonplate.data.DatabaseModelRepository;
 import ballonplate.model.DatabaseModel;
 import ballonplate.service.DatabaseModelRegistration;
 
-/**
- * JAX-RS Example
- * <p/>
- * This class produces a RESTful service to read/write the contents of the members table.
- */
+// Defines the path, where the results will be shown
 @Path("/entrys")
 @RequestScoped
 public class DatabaseModelResourceRESTService {

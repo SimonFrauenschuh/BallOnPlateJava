@@ -73,6 +73,42 @@
    	     			#{_databaseModel.positionY}
    	     		</div>
    	     	</h:column>
-    	 </h:dataTable>
+    	</h:dataTable>	
+    </ui:define>
+    
+    
+    <ui:define name="visualization">
+        	<!-- -->
+    	<h2>Visualization</h2>
+    	
+        <div id="posX" data-variableid1="#{DatabaseModelRepository.getPosX()}"></div>
+        <div id="posY" data-variableid2="#{DatabaseModelRepository.getPosY()}"></div>
+	
+    	<canvas id="visualization" width="400" height="300" style="border:1px solid #000000;">
+    		<script language="JavaScript">	
+    		
+    		var posX = document.getElementById("posX");
+    		var posY = document.getElementById("posY");
+    		
+    		var posiX = posX.getAttribute('data-variableid1');	//extracts value from Element 
+    		var posiY = posY.getAttribute('data-variableid2');
+    		
+    		var c = document.getElementById("visualization");
+			var ctx = c.getContext("2d");
+			ctx.fillStyle = "black";
+			ctx.beginPath();
+			ctx.arc(posiX,posiY,15,0,2*Math.PI);
+			ctx.fill();
+			
+			
+						
+			</script>
+		</canvas>
+		<h4>Wir freuen uns über jede Unterstützung</h4>
+		<form action="https://www.paypal.com/donate" method="post" target="_top">
+			<input type="hidden" name="hosted_button_id" value="RKCJMAWVDXHRS" />
+			<input type="image" src="https://www.paypalobjects.com/de_DE/AT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Spenden mit dem PayPal-Button" />
+			<img alt="" border="0" src="https://www.paypal.com/de_AT/i/scr/pixel.gif" width="1" height="1" />
+		</form>
     </ui:define>
 </ui:composition>
