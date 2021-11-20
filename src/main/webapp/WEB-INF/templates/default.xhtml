@@ -17,13 +17,33 @@
     <title>BallOnPlate</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <h:outputStylesheet name="css/screen.css" />
+    
+    <style type="text/css">
+		.left { 
+		float: left;
+		width: auto;
+		}
+
+		.right { 
+		float: right;
+		width: auto;
+		}
+	</style>
+    
 </h:head>
 <h:body>
     <div id="container">
-        <div id="content">
-            <ui:insert name="content">
-                    [Template content will be inserted here]
-         </ui:insert>
+    	<div id="content">
+        	<div class="left">
+            	<ui:insert name="content">
+                   	[Input and Data-Table Output]
+                </ui:insert>   	
+           	</div>
+        	<div class="right">
+        		<ui:insert name="visualization">
+                    [Graphical Frontend]
+         		</ui:insert>
+         	</div> 
         </div>
     </div>
 </h:body>

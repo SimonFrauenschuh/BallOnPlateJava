@@ -12,6 +12,7 @@ import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -19,11 +20,15 @@ import javax.persistence.criteria.Root;
 
 import ballonplate.model.DatabaseModel;
 
+@Named("DatabaseModelRepository")
 @ApplicationScoped
 public class DatabaseModelRepository {
 
 	@Inject
 	private EntityManager em;
+	
+	@Inject
+	private DatabaseModelListProducer databaseModelListProducer;
 
 	public DatabaseModel findById(Long id) {
 		return em.find(DatabaseModel.class, id);
@@ -35,5 +40,20 @@ public class DatabaseModelRepository {
 		Root<DatabaseModel> databaseModel = criteria.from(DatabaseModel.class);
 		criteria.select(databaseModel).orderBy(cb.asc(databaseModel.get("id")));
 		return em.createQuery(criteria).getResultList();
+	}
+	
+	private long findMaxId() {
+		List<DatabaseModel> list = databaseModelListProducer.getAllEntrys();
+		return list.size();
+	}
+	
+	public double getPosX() {
+		long id = findMaxId();
+		return findById(id).getPositionX();
+	}
+
+	public double getPosY() {
+		long id = findMaxId();
+		return findById(id).getPositionY();
 	}
 }
