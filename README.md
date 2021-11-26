@@ -4,7 +4,7 @@
 ## Install Wildfly as standalone
 1. Navigate to the BallOnPlateJava", where "wildfly-install.sh" is located
 	Alternative download from "https://gist.github.com/sukharevd/6087988"
-2. Execute "sudo bash wildfly-install.sh"
+2. Execute ```"sudo bash wildfly-install.sh"```
 3. Check status via "sudo systemctl status wildfly"
 4. Navigate to the new downloaded folder (not the one from GIT) to standalone/configuration and change the standalone.xml to the one, provided in Git
 5. Navigate to the bin-folder and execute "sudo bash add-user.sh"
