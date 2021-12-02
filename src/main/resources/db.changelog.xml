@@ -23,7 +23,7 @@
             <column name="positionyreal" type="float(8)">
                 <constraints nullable="false"/>
             </column>
-            <column name="action" type="int2">
+            <column name="mode" type="int2">
                 <constraints nullable="false"/>
             </column>
             <column name="error" type="int2">
@@ -43,7 +43,7 @@
         	<column  name="positionyest"  value="150"/>
         	<column  name="positionxreal"  value="198"/>
         	<column  name="positionyreal"  value="155"/>
-        	<column  name="action"  value="0"/>
+        	<column  name="mode"  value="0"/>
         	<column  name="error"  value="0"/>
     	</insert>  
     </changeSet>
