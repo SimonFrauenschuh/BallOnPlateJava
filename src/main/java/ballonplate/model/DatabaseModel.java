@@ -31,15 +31,27 @@ public class DatabaseModel implements Serializable{
 	
 	@NotNull
     @Range(min = 0, max = 2000)
-    private double positionX;
+    private double positionXEst;
 	
 	@NotNull
     @Range(min = 0, max = 2000)
-    private double positionY;
+    private double positionYEst;
+	
+	@NotNull
+    @Range(min = 0, max = 2000)
+    private double positionXReal;
+	
+	@NotNull
+    @Range(min = 0, max = 2000)
+    private double positionYReal;
 	
 	@NotNull
     @Range(min = 0, max = 12)
     private int action;
+	
+	@NotNull
+    @Range(min = 0, max = 12)
+    private int error;
 	
 	public void setId(Long id) {
         this.id = id;
@@ -49,27 +61,51 @@ public class DatabaseModel implements Serializable{
         return id;
     }
     
-	public void setPositionX(Double positionX) {
-        this.positionX = positionX;
+	public void setPositionXEst(Double positionXEst) {
+        this.positionXEst = positionXEst;
     }
 	
-    public Double getPositionX() {
-        return positionX;
+    public Double getPositionXEst() {
+        return positionXEst;
     }
     
-    public void setPositionY(Double positionY) {
-        this.positionY = positionY;
+    public void setPositionYEst(Double positionYEst) {
+        this.positionYEst = positionYEst;
     }
     
-    public Double getPositionY() {
-        return positionY;
+    public Double getPositionYEst() {
+        return positionYEst;
     }
     
-    public void setId(int action) {
+    public void setPositionXReal(Double positionXReal) {
+        this.positionXReal = positionXReal;
+    }
+	
+    public Double getPositionXReal() {
+        return positionXReal;
+    }
+    
+    public void setPositionYReal(Double positionYReal) {
+        this.positionYReal = positionYReal;
+    }
+    
+    public Double getPositionYReal() {
+        return positionYReal;
+    }
+    
+    public void setAction(int action) {
         this.action = action;
     }
     
     public Integer getAction() {
+        return action;
+    }
+    
+    public void setError(int action) {
+        this.action = action;
+    }
+    
+    public Integer getError() {
         return action;
     }
 }

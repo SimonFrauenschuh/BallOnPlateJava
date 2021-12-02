@@ -47,13 +47,23 @@ public class DatabaseModelRepository {
 		return list.size();
 	}
 	
-	public double getPosX() {
+	public double getPosXEst() {
 		long id = findMaxId();
-		return findById(id).getPositionX();
+		return findById(id).getPositionXEst();
 	}
 
-	public double getPosY() {
+	public double getPosYEst() {
 		long id = findMaxId();
-		return findById(id).getPositionY();
+		return findById(id).getPositionYEst();
+	}
+	
+	public double getPosXReal() {
+		long id = findMaxId();
+		return findById(id).getPositionXReal();
+	}
+
+	public double getPosYReal() {
+		long id = findMaxId();
+		return findById(id).getPositionYReal();
 	}
 }

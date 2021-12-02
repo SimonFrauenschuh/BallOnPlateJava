@@ -11,13 +11,22 @@
             <column  name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="databaseModel_pkey"/>
             </column>
-            <column name="positionx" type="float(8)">
+            <column name="positionxest" type="float(8)">
                 <constraints nullable="false"/>
             </column>
-            <column name="positiony" type="float(8)">
+            <column name="positionyest" type="float(8)">
                 <constraints nullable="false"/>
             </column>
-            <column name="action" type="INT">
+            <column name="positionxreal" type="float(8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="positionyreal" type="float(8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="action" type="int2">
+                <constraints nullable="false"/>
+            </column>
+            <column name="error" type="int2">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -30,9 +39,12 @@
     <changeSet author="sfrauenschuh (generated)" id="1626763182512-3">
     	<insert tableName="databasemodel">  
         	<column  name="id"  value="1"/>
-        	<column  name="positionx"  value="200"/>
-        	<column  name="positiony"  value="150"/>
+        	<column  name="positionxest"  value="200"/>
+        	<column  name="positionyest"  value="150"/>
+        	<column  name="positionxreal"  value="198"/>
+        	<column  name="positionyreal"  value="155"/>
         	<column  name="action"  value="0"/>
+        	<column  name="error"  value="0"/>
     	</insert>  
     </changeSet>
 </databaseChangeLog>
