@@ -32,11 +32,11 @@
             </div>
         	<h:panelGrid columns="3" columnClasses="titleCell">
                 <h:outputLabel for="xPosition" value="xPosition: " />
-                <h:inputText id="xPosition" value="#{newDatabaseModel.positionX}" />
+                <h:inputText id="xPosition" value="#{newDatabaseModel.positionXEst}" />
                 <h:message for="xPosition" errorClass="invalid" />
 
                 <h:outputLabel for="yPosition" value="yPosition: " />
-                <h:inputText id="yPosition" value="#{newDatabaseModel.positionY}" />
+                <h:inputText id="yPosition" value="#{newDatabaseModel.positionYEst}" />
                 <h:message for="yPosition" errorClass="invalid" />
             </h:panelGrid>
 
@@ -64,14 +64,22 @@
     	       	<h:outputText value="#{_databaseModel.id}" />
    	     	</h:column>
    	     	<h:column>
-   	     		<f:facet name = "header">Position X</f:facet>
-    	       	<h:outputText value="#{_databaseModel.positionX}" />
+   	     		<f:facet name = "header">Position X Est</f:facet>
+    	       	<h:outputText value="#{_databaseModel.positionXEst}" />
    	     	</h:column>
    	     	<h:column>
-   	     		<f:facet name = "header">Position Y</f:facet>
+   	     		<f:facet name = "header">Position Y Est</f:facet>
    	     		<div align="center">
-   	     			#{_databaseModel.positionY}
+   	     			#{_databaseModel.positionYEst}
    	     		</div>
+   	     	</h:column>
+   	     	<h:column>
+   	     		<f:facet name = "header">Position X Real</f:facet>
+    	       	<h:outputText value="#{_databaseModel.positionXReal}" />
+   	     	</h:column>
+   	     	<h:column>
+   	     		<f:facet name = "header">Position Y Real</f:facet>
+    	       	<h:outputText value="#{_databaseModel.positionYReal}" />
    	     	</h:column>
     	</h:dataTable>	
     </ui:define>
@@ -81,8 +89,8 @@
         	<!-- -->
     	<h2>Visualization</h2>
     	
-        <div id="posX" data-variableid1="#{DatabaseModelRepository.getPosX()}"></div>
-        <div id="posY" data-variableid2="#{DatabaseModelRepository.getPosY()}"></div>
+        <div id="posX" data-variableid1="#{DatabaseModelRepository.getPosXReal()}"></div>
+        <div id="posY" data-variableid2="#{DatabaseModelRepository.getPosYReal()}"></div>
 	
     	<canvas id="visualization" width="400" height="300" style="border:1px solid #000000;">
     		<script language="JavaScript">	
