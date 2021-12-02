@@ -47,7 +47,7 @@ public class DatabaseModel implements Serializable{
 	
 	@NotNull
     @Range(min = 0, max = 12)
-    private int action;
+    private int mode;
 	
 	@NotNull
     @Range(min = 0, max = 12)
@@ -93,19 +93,19 @@ public class DatabaseModel implements Serializable{
         return positionYReal;
     }
     
-    public void setAction(int action) {
-        this.action = action;
+    public void setMode(int mode) {
+        this.mode = mode;
     }
     
-    public Integer getAction() {
-        return action;
+    public Integer getMode() {
+        return mode;
     }
     
-    public void setError(int action) {
-        this.action = action;
+    public void setError(int error) {
+        this.error = error;
     }
     
     public Integer getError() {
-        return action;
+        return error;
     }
 }
