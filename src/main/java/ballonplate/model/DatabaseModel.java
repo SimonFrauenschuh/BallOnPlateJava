@@ -30,20 +30,20 @@ public class DatabaseModel implements Serializable{
     private Long id;
 	
 	@NotNull
-    @Range(min = 0, max = 2000)
-    private double positionXEst;
+    @Range(min = 0, max = 16000)
+    private int positionXEst;
 	
 	@NotNull
-    @Range(min = 0, max = 2000)
-    private double positionYEst;
+    @Range(min = 0, max = 16000)
+    private int positionYEst;
 	
 	@NotNull
-    @Range(min = 0, max = 2000)
-    private double positionXReal;
+    @Range(min = 0, max = 16000)
+    private int positionXReal;
 	
 	@NotNull
-    @Range(min = 0, max = 2000)
-    private double positionYReal;
+    @Range(min = 0, max = 16000)
+    private int positionYReal;
 	
 	@NotNull
     @Range(min = 0, max = 12)
@@ -61,35 +61,35 @@ public class DatabaseModel implements Serializable{
         return id;
     }
     
-	public void setPositionXEst(Double positionXEst) {
+	public void setPositionXEst(int positionXEst) {
         this.positionXEst = positionXEst;
     }
 	
-    public Double getPositionXEst() {
+    public int getPositionXEst() {
         return positionXEst;
     }
     
-    public void setPositionYEst(Double positionYEst) {
+    public void setPositionYEst(int positionYEst) {
         this.positionYEst = positionYEst;
     }
     
-    public Double getPositionYEst() {
+    public int getPositionYEst() {
         return positionYEst;
     }
     
-    public void setPositionXReal(Double positionXReal) {
+    public void setPositionXReal(int positionXReal) {
         this.positionXReal = positionXReal;
     }
 	
-    public Double getPositionXReal() {
+    public int getPositionXReal() {
         return positionXReal;
     }
     
-    public void setPositionYReal(Double positionYReal) {
+    public void setPositionYReal(int positionYReal) {
         this.positionYReal = positionYReal;
     }
     
-    public Double getPositionYReal() {
+    public int getPositionYReal() {
         return positionYReal;
     }
     
