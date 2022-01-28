@@ -11,16 +11,16 @@
             <column  name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="databaseModel_pkey"/>
             </column>
-            <column name="positionxest" type="float(8)">
+            <column name="positionxest" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="positionyest" type="float(8)">
+            <column name="positionyest" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="positionxreal" type="float(8)">
+            <column name="positionxreal" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="positionyreal" type="float(8)">
+            <column name="positionyreal" type="int">
                 <constraints nullable="false"/>
             </column>
             <column name="mode" type="int2">
