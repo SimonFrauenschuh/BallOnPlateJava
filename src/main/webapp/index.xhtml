@@ -42,9 +42,10 @@
 
             <p>
                 <h:panelGrid columns="1">
-                    <h:commandButton id="register"
+                        <h:commandButton id="register"
                         action="#{databaseModelController.register}"
-                        value="Register" styleClass="register" />
+                        value="Register" styleClass="register" class="button button1">
+                        </h:commandButton>
                     <h:messages styleClass="messages"
                         errorClass="invalid" infoClass="valid"
                         warnClass="warning" globalOnly="true" />
