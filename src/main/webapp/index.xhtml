@@ -13,111 +13,117 @@
     xmlns:h="http://java.sun.com/jsf/html"
     template="/WEB-INF/templates/default.xhtml">
     <ui:define name="content">
-        <h1>BallOnPlate</h1>
-        <div>
+    	<div class="h1_title">
+       		<h1>BallOnPlate</h1>
             <p>Diploma Work of Sebastian Haider, Philip Jessner and Simon Frauenschuh</p>
         </div>
-		
 		<!-- Define Class that is called everytime, the site is reloaded / called -->
 		<f:metadata>
     		<f:viewParam name="foo" value="#{bean.foo}" />
     		<f:event type="preRenderView" listener="#{databaseModelController.startup}" />
 		</f:metadata>
 		
-		
+		<div class="left">
         <h:form id="reg" style="width:100%">
-        	<h2>Web Control</h2>
-            <div>
-            	<p>Maybe some extremely helpful information in the future</p>
-            </div>
-        	<h:panelGrid columns="3" columnClasses="titleCell">
-                <h:outputLabel for="xPosition" value="xPosition: " />
-                <h:inputText id="xPosition" value="#{newDatabaseModel.positionXEst}" />
-                <h:message for="xPosition" errorClass="invalid" />
-
-                <h:outputLabel for="yPosition" value="yPosition: " />
-                <h:inputText id="yPosition" value="#{newDatabaseModel.positionYEst}" />
-                <h:message for="yPosition" errorClass="invalid" />
-            </h:panelGrid>
-
-            <p>
-                <h:panelGrid columns="1">
-                        <h:commandButton id="register"
-                        action="#{databaseModelController.register}"
-                        value="Register" styleClass="register" class="button button1">
-                        </h:commandButton>
-                    <h:messages styleClass="messages"
-                        errorClass="invalid" infoClass="valid"
-                        warnClass="warning" globalOnly="true" />
-                </h:panelGrid>
-            </p>
+        	<div class="box_webControl">
+	        	<h2>Web Control</h2>
+	            <div>
+	            	<p>Maybe some extremely helpful information in the future</p>
+	            </div>
+	        	<h:panelGrid columns="3" columnClasses="titleCell">
+	                <h:outputLabel for="xPosition" value="xPosition: " />
+	                <h:inputText id="xPosition" value="#{newDatabaseModel.positionXEst}" />
+	                <h:message for="xPosition" errorClass="invalid" />
+	
+	                <h:outputLabel for="yPosition" value="yPosition: " />
+	                <h:inputText id="yPosition" value="#{newDatabaseModel.positionYEst}" />
+	                <h:message for="yPosition" errorClass="invalid" />
+	            </h:panelGrid>
+	
+	            <p>
+	                <h:panelGrid columns="1">
+	                        <h:commandButton id="register"
+	                        action="#{databaseModelController.register}"
+	                        value="Register" styleClass="register" class="button button_register">
+	                        </h:commandButton>
+	                    <h:messages styleClass="messages"
+	                        errorClass="invalid" infoClass="valid"
+	                        warnClass="warning" globalOnly="true" />
+	                </h:panelGrid>
+	            </p>
+	          </div>
         </h:form>
         
-        <h2>Web View</h2>
-        <h:panelGroup rendered="#{empty allEntrys}">
-            <em>No registered values</em>
-        </h:panelGroup>
-        <h:dataTable var="_databaseModel" value="#{allEntrys}"
-        	rendered="#{not empty allEntrys}"
-	        styleClass="compact">
-	        <h:column>
-   	     		<f:facet name = "header">ID</f:facet>
-    	       	<h:outputText value="#{_databaseModel.id}" />
-   	     	</h:column>
-   	     	<h:column>
-   	     		<f:facet name = "header">Position X Est</f:facet>
-    	       	<h:outputText value="#{_databaseModel.positionXEst}" />
-   	     	</h:column>
-   	     	<h:column>
-   	     		<f:facet name = "header">Position Y Est</f:facet>
-   	     		<div align="center">
-   	     			#{_databaseModel.positionYEst}
-   	     		</div>
-   	     	</h:column>
-   	     	<h:column>
-   	     		<f:facet name = "header">Position X Real</f:facet>
-    	       	<h:outputText value="#{_databaseModel.positionXReal}" />
-   	     	</h:column>
-   	     	<h:column>
-   	     		<f:facet name = "header">Position Y Real</f:facet>
-    	       	<h:outputText value="#{_databaseModel.positionYReal}" />
-   	     	</h:column>
-    	</h:dataTable>	
+        <div class="box_webView">
+	        <h2>Web View</h2>
+	        <h:panelGroup rendered="#{empty allEntrys}">
+	            <em>No registered values</em>
+	        </h:panelGroup>
+	        <h:dataTable var="_databaseModel" value="#{allEntrys}"
+	        	rendered="#{not empty allEntrys}"
+		        styleClass="compact">
+		        <h:column>
+	   	     		<f:facet name = "header">ID</f:facet>
+	    	       	<h:outputText value="#{_databaseModel.id}" />
+	   	     	</h:column>
+	   	     	<h:column>
+	   	     		<f:facet name = "header">Position X Est</f:facet>
+	    	       	<h:outputText value="#{_databaseModel.positionXEst}" />
+	   	     	</h:column>
+	   	     	<h:column>
+	   	     		<f:facet name = "header">Position Y Est</f:facet>
+	   	     		<div align="center">
+	   	     			#{_databaseModel.positionYEst}
+	   	     		</div>
+	   	     	</h:column>
+	   	     	<h:column>
+	   	     		<f:facet name = "header">Position X Real</f:facet>
+	    	       	<h:outputText value="#{_databaseModel.positionXReal}" />
+	   	     	</h:column>
+	   	     	<h:column>
+	   	     		<f:facet name = "header">Position Y Real</f:facet>
+	    	       	<h:outputText value="#{_databaseModel.positionYReal}" />
+	   	     	</h:column>
+	    	</h:dataTable>
+	    	</div>
+    	</div>
     </ui:define>
     
     
     <ui:define name="visualization">
         	<!-- -->
-    	<h2>Visualization</h2>
-    	
-        <div id="posX" data-variableid1="#{DatabaseModelRepository.getPosXReal()}"></div>
-        <div id="posY" data-variableid2="#{DatabaseModelRepository.getPosYReal()}"></div>
-	
-    	<canvas id="visualization" width="400" height="300" style="border:1px solid #000000;">
-    		<script language="JavaScript">	
-    		
-    		var posX = document.getElementById("posX");
-    		var posY = document.getElementById("posY");
-    		
-    		var posiX = posX.getAttribute('data-variableid1');	//extracts value from Element 
-    		var posiY = posY.getAttribute('data-variableid2');
-    		
-    		var c = document.getElementById("visualization");
-			var ctx = c.getContext("2d");
-			ctx.fillStyle = "black";
-			ctx.beginPath();
-			ctx.arc(posiX,posiY,15,0,2*Math.PI);
-			ctx.fill();
-			
-			
-						
-			</script>
-		</canvas>
+        <div class="right">
+	        <div class="box_visualization">
+	    	<h2>Visualization</h2>
+	    	
+	        <div id="posX" data-variableid1="#{DatabaseModelRepository.getPosXReal()}"></div>
+	        <div id="posY" data-variableid2="#{DatabaseModelRepository.getPosYReal()}"></div>
+		
+		    	<canvas id="visualization" width="400" height="300" style="border:2px solid #000000; background-color: whit;">
+		    		<script language="JavaScript">	
+		    		
+		    		var posX = document.getElementById("posX");
+		    		var posY = document.getElementById("posY");
+		    		
+		    		var posiX = posX.getAttribute('data-variableid1');	//extracts value from Element 
+		    		var posiY = posY.getAttribute('data-variableid2');
+		    		
+		    		var c = document.getElementById("visualization");
+					var ctx = c.getContext("2d");
+					ctx.fillStyle = "black";
+					ctx.beginPath();
+					ctx.arc(posiX,posiY,15,0,2*Math.PI);
+					ctx.fill();
+													
+					</script>
+				</canvas>
+			</div>
 		<h4>Wir freuen uns über jede Unterstützung</h4>
 		<form action="https://www.paypal.com/donate" method="post" target="_top">
 			<input type="hidden" name="hosted_button_id" value="RKCJMAWVDXHRS" />
 			<input type="image" src="https://www.paypalobjects.com/de_DE/AT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Spenden mit dem PayPal-Button" />
 			<img alt="" border="0" src="https://www.paypal.com/de_AT/i/scr/pixel.gif" width="1" height="1" />
 		</form>
+		</div>
     </ui:define>
 </ui:composition>
