@@ -19,57 +19,86 @@
     <h:outputStylesheet name="css/screen.css" />
     
     <style type="text/css">
-		.left { 
-		float: left;
-		width: auto;
+    	.h1_title{
+    	text-align: center;
+    	float: center;
+    	margin-bottom: 20px;
+    	border-bottom: 2px solid black;
+    	}
+    
+		.box_webControl{
+		 	text-align: center;
+   			height: auto;
+		    width: 400px;
+		    background: rgba(173, 216, 230, 0.7);
+		    border-radius: 10px;
 		}
 
-		.right { 
-		float: right;
-		width: auto;
+		.box_webView{
+		 	text-align: center;
+   			height: auto;
+		    width: 400px;
+		    background: rgba(173, 216, 230, 0.7);
+		    border-radius: 10px;
+		}
+		
+		.box_visualization{
+		 	text-align: center;
+   			height: 380px;
+		    width: 450px;
+		    background: rgba(173, 216, 230, 0.7);
+		    border-radius: 10px;
 		}
 		
 		.button {
-  		background-color: #008CBA; /* blue */
-  		border: none;
- 		color: white;
-  		padding: 12px 24px;
-  		text-align: center;
-  		text-decoration: none;
-  		display: inline-block;
-  		font-size: 16px;
-  		margin: 4px 2px;
-  		transition-duration: 0.4s;
-  		cursor: pointer;
+	  		background-color: #008CBA; /* blue */
+	  		border: none;
+	 		color: white;
+	  		padding: 12px 24px;
+	  		text-align: center;
+	  		text-decoration: none;
+	  		display: inline-block;
+	  		font-size: 16px;
+	  		margin: 4px 2px;
+	  		transition-duration: 0.4s;
+	  		cursor: pointer;
 		}
 
-		.button1 {
-		  background-color: white; 
-		  color: black; 
-		  border: 2px solid #008CBA;
-		  border-radius: 10px;
+		.button_register {
+			background-color: white; 
+			color: black; 
+			margin-left: 140px;
+			border: 2px solid #008CBA;
+			border-radius: 10px;
 		}
 		
-		.button1:hover {
-		  background-color: #008CBA;
-		  color: white;
+		.button_register:hover {
+			background-color: #008CBA;
+			color: white;
 		}
+		
+		.left { 
+			float: left;
+			width: auto;
+		}
+
+		.right { 
+			float: right;
+			width: auto;
+		}
+		
 	</style>
     
 </h:head>
 <h:body>
     <div id="container">
     	<div id="content">
-        	<div class="left">
-            	<ui:insert name="content">
-                   	[Input and Data-Table Output]
-                </ui:insert>   	
-           	</div>
-        	<div class="right">
-        		<ui:insert name="visualization">
-                    [Graphical Frontend]
-         		</ui:insert>
-         	</div> 
+            <ui:insert name="content">
+            	[Input and Data-Table Output]
+            </ui:insert>   	
+        	<ui:insert name="visualization">
+            	[Graphical Frontend]
+         	</ui:insert>
         </div>
     </div>
 </h:body>
