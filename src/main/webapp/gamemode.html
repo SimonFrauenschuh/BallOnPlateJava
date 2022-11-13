@@ -6,27 +6,37 @@
 </head>
 <body>
 <h2>Gamemode</h2>
-	    	
-	        <div id="posX" data-variableid1="#{DatabaseModelRepository.getPosXReal()}"></div>
-	        <div id="posY" data-variableid2="#{DatabaseModelRepository.getPosYReal()}"></div>
 		
-		    	<canvas id="gamemode" width="400" height="300" style="border:2px solid #000000; background-color: whit;">
-		    		<script language="JavaScript">	
-		    		
-		    		var posX = document.getElementById("posX");
-		    		var posY = document.getElementById("posY");
-		    		
-		    		var posiX = posX.getAttribute('data-variableid1');	//extracts value from Element 
-		    		var posiY = posY.getAttribute('data-variableid2');
-		    		
-		    		var c = document.getElementById("visualization");
-					var ctx = c.getContext("2d");
-					ctx.fillStyle = "black";
-					ctx.beginPath();
-					ctx.arc(posiX,posiY,15,0,2*Math.PI);
-					ctx.fill();
-													
-					</script>
-				</canvas>
+   	<canvas id="gamemode" width="400" height="300" style="border:2px solid #000000; background-color: whit;">
+   		<!-- Getting the ball-values from the db and create the canvas-->
+		<script language="JavaScript">
+		
+			fetch('http://localhost:8080/BallOnPlate/gamemode/GamemodeServlet', {
+			    method: 'GET',
+			    headers: {
+			        'Accept': 'application/json',
+			    },
+			})
+			.then(response => response.text())
+			.then(text => {
+						console.log(text.slice(0, 3));
+						console.log(text.slice(3));
+						
+						var posX = text.slice(0, 3);
+			    		var posY = text.slice(3);
+			    		
+			    		var c = document.getElementById("gamemode");
+						var ctx = c.getContext("2d");
+						ctx.fillStyle = "black";
+						ctx.beginPath();
+						ctx.arc(posX,posY,15,0,2*Math.PI);
+						ctx.fill();
+					}
+			)
+											
+		</script>
+	</canvas>
+				
+				
 </body>
 </html>
