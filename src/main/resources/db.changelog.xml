@@ -11,16 +11,16 @@
             <column  name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="databaseModel_pkey"/>
             </column>
-            <column name="positionxest" type="int">
+            <column name="xest" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="positionyest" type="int">
+            <column name="yest" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="positionxreal" type="int">
+            <column name="xreal" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="positionyreal" type="int">
+            <column name="yreal" type="int">
                 <constraints nullable="false"/>
             </column>
             <column name="mode" type="int2">
@@ -39,10 +39,10 @@
     <changeSet author="sfrauenschuh (generated)" id="1626763182512-3">
     	<insert tableName="databasemodel">  
         	<column  name="id"  value="1"/>
-        	<column  name="positionxest"  value="200"/>
-        	<column  name="positionyest"  value="150"/>
-        	<column  name="positionxreal"  value="198"/>
-        	<column  name="positionyreal"  value="155"/>
+        	<column  name="xest"  value="200"/>
+        	<column  name="yest"  value="150"/>
+        	<column  name="xreal"  value="198"/>
+        	<column  name="yreal"  value="155"/>
         	<column  name="mode"  value="0"/>
         	<column  name="error"  value="0"/>
     	</insert>  

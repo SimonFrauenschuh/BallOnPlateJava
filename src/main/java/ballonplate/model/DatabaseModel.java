@@ -30,20 +30,20 @@ public class DatabaseModel implements Serializable{
     private Long id;
 	
 	@NotNull
-    @Range(min = 0, max = 16000)
-    private int positionXEst;
+    @Range(min = 0, max = 400)
+    private int xEst;
 	
 	@NotNull
-    @Range(min = 0, max = 16000)
-    private int positionYEst;
+    @Range(min = 0, max = 400)
+    private int yEst;
 	
 	@NotNull
-    @Range(min = 0, max = 16000)
-    private int positionXReal;
+    @Range(min = 0, max = 400)
+    private int xReal;
 	
 	@NotNull
-    @Range(min = 0, max = 16000)
-    private int positionYReal;
+    @Range(min = 0, max = 400)
+    private int yReal;
 	
 	@NotNull
     @Range(min = 0, max = 12)
@@ -61,36 +61,36 @@ public class DatabaseModel implements Serializable{
         return id;
     }
     
-	public void setPositionXEst(int positionXEst) {
-        this.positionXEst = positionXEst;
+	public void setPositionXEst(int xEst) {
+        this.xEst = xEst;
     }
 	
     public int getPositionXEst() {
-        return positionXEst;
+        return xEst;
     }
     
-    public void setPositionYEst(int positionYEst) {
-        this.positionYEst = positionYEst;
+    public void setPositionYEst(int yEst) {
+        this.yEst = yEst;
     }
     
     public int getPositionYEst() {
-        return positionYEst;
+        return yEst;
     }
     
-    public void setPositionXReal(int positionXReal) {
-        this.positionXReal = positionXReal;
+    public void setPositionXReal(int xReal) {
+        this.xReal = xReal;
     }
 	
     public int getPositionXReal() {
-        return positionXReal;
+        return xReal;
     }
     
-    public void setPositionYReal(int positionYReal) {
-        this.positionYReal = positionYReal;
+    public void setPositionYReal(int yReal) {
+        this.yReal = yReal;
     }
     
     public int getPositionYReal() {
-        return positionYReal;
+        return yReal;
     }
     
     public void setMode(int mode) {
