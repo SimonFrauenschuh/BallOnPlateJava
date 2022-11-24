@@ -38,15 +38,42 @@
 	<!-- Setting the mode to gamemode and send the gyroscope values of the phone-->
 	<script type="text/javascript">
 		
-		// Copyright https://reqbin.com/code/javascript/wzp2hxwh/javascript-post-request-example
-		fetch('http://localhost:8080/BallOnPlate/gamemode/GamemodeServlet', {
-			method: 'POST',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-				},
-			body: JSON.stringify({ posXEst: 13, posYEst: 05 })
-			})
+		// Copyright https://itnext.io/gyro-web-accessing-the-device-orientation-in-javascript-387da43eeb84
+		function handleOrientation(event) {
+	  	  const gyroX = event.beta;
+	  	  const gyroY = event.gamma;
+	  	  
+		  const stringValue = '{ posXEst: x, posYEst: y }';
+		  stringValue.replace('x', gyroX) && stringValue.replace('y', gyroY);
+		  
+			// Copyright https://reqbin.com/code/javascript/wzp2hxwh/javascript-post-request-example
+				fetch('http://172.16.167.110:8080/BallOnPlate/gamemode/GamemodeServlet', {
+					method: 'POST',
+					headers: {
+						'Accept': 'application/json',
+						'Content-Type': 'application/json'
+						},
+					body: JSON.stringify(stringValue)
+				})
+		}
+	
+			  if (typeof DeviceMotionEvent.requestPermission === 'function') {
+			    // Handle iOS 13+ devices.
+			    DeviceMotionEvent.requestPermission()
+			      .then((state) => {
+			        if (state === 'granted') {
+			          window.addEventListener('devicemotion', handleOrientation);
+			        } else {
+			          console.error('Request to access the orientation was rejected');
+			        }
+			      })
+			      .catch(console.error);
+			  } else {
+			    // Handle regular non iOS 13+ devices.
+			    window.addEventListener('devicemotion', handleOrientation);
+			  }
+			
+		
 	</script>
 				
 </body>

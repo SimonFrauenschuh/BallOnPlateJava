@@ -33,7 +33,7 @@
 1. Execute "sudo apt update" and "sudo apt full-upgrade"
 1. Execute "sudo apt install postgresql" to install
 2. Execute "sudo su postgres" to change to superuser
-3. Execute "creatuser pi -p --interactive" to give your Raspberry admin-rights
+3. Execute "createuser pi -P --interactive" to give your Raspberry admin-rights
 	Use Passwort BallOnPlateDSOwner
 4. Execute "psql"
 5. In the PostgreS cmd-line, execute "CREATE DATABASE pi;"
