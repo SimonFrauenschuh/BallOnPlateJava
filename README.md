@@ -49,6 +49,7 @@
 	"WFLYSRV0010: Deployed "BallOnPlate.war" (runtime-name : "BallOnPlate.war")" is good, errors are bad
 4. Go to the web-console - "Deployments". There you should see "BallOnPlate.war".
 5. To open the application: click on "BallOnPlate.war" and use the the link provided (Context root)
+	- If you want to use the "gamemode", you have to use a https-connection --> https://ipv4:8443/...
 
 
 ### Note!
