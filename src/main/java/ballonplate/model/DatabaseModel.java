@@ -30,19 +30,19 @@ public class DatabaseModel implements Serializable{
     private Long id;
 	
 	@NotNull
-    @Range(min = 0, max = 400)
+    @Range(min = -400, max = 400)
     private int xEst;
 	
 	@NotNull
-    @Range(min = 0, max = 400)
+    @Range(min = -400, max = 400)
     private int yEst;
 	
 	@NotNull
-    @Range(min = 0, max = 400)
+    @Range(min = -400, max = 400)
     private int xReal;
 	
 	@NotNull
-    @Range(min = 0, max = 400)
+    @Range(min = -400, max = 400)
     private int yReal;
 	
 	@NotNull

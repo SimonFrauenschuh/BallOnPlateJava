@@ -83,8 +83,22 @@ public class GamemodeServlet extends HttpServlet {
 		gameDatabaseModel = new DatabaseModel();
 		gameDatabaseModel.setError(0);
 		gameDatabaseModel.setMode(1);
-		gameDatabaseModel.setPositionXEst(Integer.parseInt("" + postBody.charAt(11) + postBody.charAt(12)));
-		gameDatabaseModel.setPositionYEst(Integer.parseInt("" + postBody.charAt(24) + postBody.charAt(25)));
+		int posX, posY;
+		if(postBody.charAt(11) == '-') {
+			posX = -Integer.parseInt("" + postBody.charAt(12) + postBody.charAt(13));
+		} else {
+			posX = Integer.parseInt("" + postBody.charAt(12) + postBody.charAt(13));
+		}
+		if(postBody.charAt(25) == '-') {
+			posY = -Integer.parseInt("" + postBody.charAt(26) + postBody.charAt(27));
+		} else {
+			posY = Integer.parseInt("" + postBody.charAt(26) + postBody.charAt(27));
+		}
+		gameDatabaseModel.setPositionXEst(posX);
+		gameDatabaseModel.setPositionYEst(posY);
+		gameDatabaseModel.setPositionXReal(303);
+		gameDatabaseModel.setPositionYReal(303);
+		
 		
 		
 		try {

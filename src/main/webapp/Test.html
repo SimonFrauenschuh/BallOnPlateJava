@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Gamemode</title>
+</head>
+<body>
+<!--<p>Beta: </p>
+<p id="beta"></p>
+<p>Gamma: </p>
+<p id="gamma"></p>
+<p id="text"></p>
+-->
+
+<h1>Device Orientation - TEST-DA</h1>
+<p>HTML 5 device orientation demo, currently only supported by Webkit (Google Chrome 9+) and Mozilla (Firefox 3.6+) based browsers.</p>
+
+<p> <a href="http://www.juurlink.org/2011/02/html-5-accelerometer/" target="_blank">HTML 5 Accelerometer</a></p>
+<p style="display: inline-block;" id="warning">Warning: Cannot receive device orientation events, this browser is not supported.</p>
+<div id="canvas">
+  <div id="middle"></div>
+  <div id="ball"></div>
+</div>
+
+<!-- Setting the mode to gamemode and send the gyroscope values of the phone-->
+<script type="text/javascript">
+/*const beta =  document.getElementById("beta");
+	const gamma =  document.getElementById("gamma");
+	beta.innerText = "not read";
+	gamma.innerText = "not read";
+	function handleOrientation(event) {
+		beta.innerText = event.beta;
+		gamma.innerText = event.gamma;
+	}
+
+	if (typeof DeviceMotionEvent.requestPermission === 'function') {
+	// Handle iOS 13+ devices.
+	DeviceMotionEvent.requestPermission()
+		.then((state) => {
+		if (state === 'granted') {
+			window.addEventListener('deviceorintation', handleOrientation);
+		} else {
+			console.error('Request to access the orientation was rejected');
+		}
+		})
+		.catch(console.error);
+	} else {
+		// Handle regular non iOS 13+ devices.
+		window.addEventListener('deviceorintation', handleOrientation);
+	}
+*/
+
+var initialX = null;
+var initialY = null;
+
+var ball = document.getElementById('ball');
+
+function handleOrientationEvent(event) {
+
+  var x = event.beta ? event.beta : event.y * 90;
+  var y = event.gamma ? event.gamma : event.x * 90;
+
+  window.console && console.info('Raw position: x, y: ', x, y);
+
+  if (!initialX && !initialY) {
+
+	initialX = x;
+	initialY = y;
+
+  } else {
+
+	var positionX = initialX - x;
+	var positionY = initialY - y;
+
+	ball.style.top = (90 + positionX * 5) + 'px';
+	ball.style.left = (90 + positionY * 5) + 'px';
+  }
+}
+
+function isEventFired() {
+  if (!initialX && !initialY) {
+	var warningElement = document.getElementById('warning');
+	warningElement.innerText = 'Warning: Cannot receive device orientation events, this browser is not supported.';
+	warningElement.style.display = 'inline-block';
+  }
+}
+
+// Webkit en Mozilla variant beide registreren.
+window.addEventListener("MozOrientation", handleOrientationEvent, true);
+window.addEventListener("deviceorientation", handleOrientationEvent, true);
+
+setTimeout(isEventFired, 2000);
+	
+</script>
+<style>			
+h1 {
+	font-family: verdana, sans-serif;
+	font-weight: bold;
+	font-size: 28px;
+  }
+  
+  p {
+	font-family: verdana, sans-serif;
+	font-size: 12px;
+  }
+  
+  #canvas {
+	width: 200px;
+	height: 200px;
+	border: 5px solid #ddd;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+  }
+  
+  #middle {
+	background-color: #aaa;
+	position: relative;
+	width: 4px;
+	height: 4px;
+	left: 98px;
+	top: 98px;
+  }
+  
+  #ball {
+	background-color: green;
+	position: relative;
+	width: 20px;
+	height: 20px;
+	left: 90px;
+	top: 90px;
+	border-radius: 20px;
+	-moz-border-radius: 20px;
+	box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+	-webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+	background-image: -moz-linear-gradient(top, rgba(255, 255, 255, .5), rgba(255, 255, 255, 0) 12px);
+	background-image: -webkit-gradient(linear, 0 0, 0 12, from(rgba(255, 255, 255, .5)), to(rgba(255, 255, 255, 0)));
+  }
+  
+  #warning {
+	display: none;
+	padding: 5px 10px;
+	font-weight: bold;
+  }
+</style>
+</body>
+</html>
