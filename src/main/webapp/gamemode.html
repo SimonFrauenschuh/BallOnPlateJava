@@ -64,14 +64,14 @@
      background-image: -moz-linear-gradient(top, rgba(255, 255, 255, .5), rgba(255, 255, 255, 0) 12px);
      background-image: -webkit-gradient(linear, 0 0, 0 12, from(rgba(255, 255, 255, .5)), to(rgba(255, 255, 255, 0)));
    }
-</style>
-
-	<!-- Testbereich ENDE -->
-	
+</style>	
 	
 	<!-- Setting the mode to gamemode and send the gyroscope values of the phone-->
 	<script type="text/javascript">
-		
+	
+		var gyroXOld = 0;
+		var gyroYOld = 0;
+	
 		// Copyright https://itnext.io/gyro-web-accessing-the-device-orientation-in-javascript-387da43eeb84
 		function handleOrientation(event) {
 	  		var gyroX = event.beta; //? event.beta : event.x * 90;
@@ -80,83 +80,71 @@
 	  		gyroX = parseInt(gyroX, 10);
 	  		gyroY = parseInt(gyroY, 10);
 	  		
-	  		if(gyroX > 9){	//X consist of two digits (positive)
-	  			if(gyroY > 9){	//Y consist of two digits (positive)
-	  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: +" + gyroY + " }"
-	  			} else if (gyroY >= 0){	//Y consist of one digit (positive)
-	  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: +0" + gyroY + " }"
-	  			} else if (gyroY < -9) { //Y consist of two digits (negative)
-	  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: " + gyroY + " }"
-	  			} else if (gyroY < 0) { //Y consist of one digit (negative)
-	  				gyroY = gyroY * (-1);
-	  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: -0" + gyroY + " }"
-	  			}
-	  		} else if(gyroX < -9) {	//X consist of two digits (negative)
-	  			if(gyroY > 9){
-	  				var stringValue = "{posXEst: " + gyroX + ", posYEst: +" + gyroY + " }"
-	  			} else if (gyroY >= 0){
-	  				var stringValue = "{posXEst: " + gyroX + ", posYEst: +0" + gyroY + " }"
-	  			} else if (gyroY < -9) {
-	  				var stringValue = "{posXEst: " + gyroX + ", posYEst: " + gyroY + " }"
-	  			} else if (gyroY < 0) {
-	  				gyroY = gyroY * (-1);
-	  				var stringValue = "{posXEst: " + gyroX + ", posYEst: -0" + gyroY + " }"
-	  			}
-	  		} else if(gyroX >= 0){	//X consist of one digit (positive)
-	  			if(gyroY > 9){
-	  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: +" + gyroY + " }"
-	  			} else if (gyroY >= 0){
-	  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: +0" + gyroY + " }"
-	  			} else if (gyroY < -9) {
-	  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: " + gyroY + " }"
-	  			} else if (gyroY < 0) {
-	  				gyroY = gyroY * (-1);
-	  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: -0" + gyroY + " }"
-	  			}
-	  		} else {	//X consist of one digit (negative)
-  				gyroX = gyroX * (-1);
-	  			if(gyroY > 9){
-	  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: +" + gyroY + " }"
-	  			} else if (gyroY >= 0){
-	  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: +0" + gyroY + " }"
-	  			} else if (gyroY < -9) {
-	  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: " + gyroY + " }"
-	  			} else if (gyroY < 0) {
-	  				gyroY = gyroY * (-1);
-	  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: -0" + gyroY + " }"
-	  			}
+	  		if((gyroX < gyroXOld - 1) || (gyroX > gyroXOld + 1) || (gyroY < gyroYOld - 1) || (gyroY > gyroYOld + 1)) {	// Don't send values that are the same as before
+	  			gyroXOld = gyroX;
+		  		gyroYOld = gyroY;
+	  			if(gyroX > 9){	//X consist of two digits (positive)
+		  			if(gyroY > 9){	//Y consist of two digits (positive)
+		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: +" + gyroY + " }"
+		  			} else if (gyroY >= 0){	//Y consist of one digit (positive)
+		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: +0" + gyroY + " }"
+		  			} else if (gyroY < -9) { //Y consist of two digits (negative)
+		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: " + gyroY + " }"
+		  			} else if (gyroY < 0) { //Y consist of one digit (negative)
+		  				gyroY = gyroY * (-1);
+		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: -0" + gyroY + " }"
+		  			}
+		  		} else if(gyroX < -9) {	//X consist of two digits (negative)
+		  			if(gyroY > 9){
+		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: +" + gyroY + " }"
+		  			} else if (gyroY >= 0){
+		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: +0" + gyroY + " }"
+		  			} else if (gyroY < -9) {
+		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: " + gyroY + " }"
+		  			} else if (gyroY < 0) {
+		  				gyroY = gyroY * (-1);
+		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: -0" + gyroY + " }"
+		  			}
+		  		} else if(gyroX >= 0){	//X consist of one digit (positive)
+		  			if(gyroY > 9){
+		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: +" + gyroY + " }"
+		  			} else if (gyroY >= 0){
+		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: +0" + gyroY + " }"
+		  			} else if (gyroY < -9) {
+		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: " + gyroY + " }"
+		  			} else if (gyroY < 0) {
+		  				gyroY = gyroY * (-1);
+		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: -0" + gyroY + " }"
+		  			}
+		  		} else {	//X consist of one digit (negative)
+	  				gyroX = gyroX * (-1);
+		  			if(gyroY > 9){
+		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: +" + gyroY + " }"
+		  			} else if (gyroY >= 0){
+		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: +0" + gyroY + " }"
+		  			} else if (gyroY < -9) {
+		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: " + gyroY + " }"
+		  			} else if (gyroY < 0) {
+		  				gyroY = gyroY * (-1);
+		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: -0" + gyroY + " }"
+		  			}
+		  		}
+	  		  
+				// Copyright https://reqbin.com/code/javascript/wzp2hxwh/javascript-post-request-example
+				fetch('/BallOnPlate/gamemode/GamemodeServlet', {
+					method: 'POST',
+					headers: {
+						'Accept': 'application/json',
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(stringValue)
+				})
 	  		}
-	  		
-	  		window.console && console.info(stringValue);
-	  	  
-			
-		  
-			// Copyright https://reqbin.com/code/javascript/wzp2hxwh/javascript-post-request-example
-			fetch('/BallOnPlate/gamemode/GamemodeServlet', {
-				method: 'POST',
-				headers: {
-					'Accept': 'application/json',
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(stringValue)
-			})
 		}
-	
-		 if (typeof DeviceMotionEvent.requestPermission === 'function') {
-			// Handle iOS 13+ devices.
-		    DeviceMotionEvent.requestPermission().then((state) => {
-		    	if (state === 'granted') {
-		          window.addEventListener('devicemotion', handleOrientation, true);
-		        } else {
-		          console.error('Request to access the orientation was rejected');
-		        }
-			}).catch(console.error);
-		  } else { 
-		    // Handle regular non iOS 13+ devices.
-		    window.addEventListener('deviceorientation', handleOrientation, true);
-		  window.addEventListener("MozOrientation", handleOrientation, true);
-		  }
-			
+		
+		// Handle regular non iOS 13+ devices.
+		window.addEventListener('deviceorientation', handleOrientation, true);
+		window.addEventListener("MozOrientation", handleOrientation, true);			
 		
 	</script>
 				
