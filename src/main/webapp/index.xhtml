@@ -100,21 +100,28 @@
 	        <div id="posY" data-variableid2="#{DatabaseModelRepository.getPosYReal()}"></div>
 		
 		    	<a href="/BallOnPlate/gamemode.html"><canvas id="visualization" width="400" height="300" style="border:2px solid #000000; background-color: whit;">
-		    		<script type="text/javascript">	
-		    		
-		    		var posX = document.getElementById("posX");
-		    		var posY = document.getElementById("posY");
-		    		
-		    		var posiX = posX.getAttribute('data-variableid1');	//extracts value from Element 
-		    		var posiY = posY.getAttribute('data-variableid2');
-		    		
-		    		var c = document.getElementById("visualization");
-					var ctx = c.getContext("2d");
-					ctx.fillStyle = "black";
-					ctx.beginPath();
-					ctx.arc(posiX,posiY,15,0,2*Math.PI);
-					ctx.fill();
-													
+		    		<script type="text/javascript">
+			    		setInterval(function(){ 
+							fetch('/BallOnPlate/gamemode/GamemodeServlet', {
+							    method: 'GET',
+							    headers: {
+							        'Accept': 'application/json',
+							    },
+							})
+							.then(response => response.text())
+							.then(text => {						
+										var posX = text.slice(0, 3);
+							    		var posY = text.slice(3);
+							    		
+							    		var c = document.getElementById("gamemode");
+										var ctx = c.getContext("2d");
+										ctx.fillStyle = "black";
+										ctx.beginPath();
+										ctx.arc(posX,posY,15,0,2*Math.PI);
+										ctx.fill();
+									}
+							) 
+						}, 100);				
 					</script>
 				</canvas></a>
 			</div>

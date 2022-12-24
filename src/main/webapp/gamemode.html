@@ -10,28 +10,27 @@
    	<canvas id="gamemode" width="400" height="300" style="border:2px solid #000000; background-color: whit;">
    		<!-- Getting the ball-values from the db and create the canvas-->
 		<script type="text/javascript">
-			
-			// Copyright https://reqbin.com/code/javascript/rftjizcl/javascript-get-request-example
-			fetch('/BallOnPlate/gamemode/GamemodeServlet', {
-			    method: 'GET',
-			    headers: {
-			        'Accept': 'application/json',
-			    },
-			})
-			.then(response => response.text())
-			.then(text => {						
-						var posX = text.slice(0, 3);
-			    		var posY = text.slice(3);
-			    		
-			    		var c = document.getElementById("gamemode");
-						var ctx = c.getContext("2d");
-						ctx.fillStyle = "black";
-						ctx.beginPath();
-						ctx.arc(posX,posY,15,0,2*Math.PI);
-						ctx.fill();
-					}
-			)
-											
+			setInterval(function(){ 
+				fetch('/BallOnPlate/gamemode/GamemodeServlet', {
+				    method: 'GET',
+				    headers: {
+				        'Accept': 'application/json',
+				    },
+				})
+				.then(response => response.text())
+				.then(text => {						
+							var posX = text.slice(0, 3);
+				    		var posY = text.slice(3);
+				    		
+				    		var c = document.getElementById("gamemode");
+							var ctx = c.getContext("2d");
+							ctx.fillStyle = "black";
+							ctx.beginPath();
+							ctx.arc(posX,posY,15,0,2*Math.PI);
+							ctx.fill();
+						}
+				) 
+			}, 100);										
 		</script>
 	</canvas>
 	
@@ -129,8 +128,7 @@
 		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: -0" + gyroY + " }"
 		  			}
 		  		}
-	  		  
-				// Copyright https://reqbin.com/code/javascript/wzp2hxwh/javascript-post-request-example
+	  		    
 				fetch('/BallOnPlate/gamemode/GamemodeServlet', {
 					method: 'POST',
 					headers: {
