@@ -73,8 +73,8 @@
 	
 		// Copyright https://itnext.io/gyro-web-accessing-the-device-orientation-in-javascript-387da43eeb84
 		function handleOrientation(event) {
-	  		var gyroX = event.beta; //? event.beta : event.x * 90;
-	  		var gyroY = event.gamma; //? event.gamma : event.y * 90;
+	  		var gyroX = event.gamma;
+	  		var gyroY = event.beta;
 	  		
 	  		gyroX = parseInt(gyroX, 10);
 	  		gyroY = parseInt(gyroY, 10);
