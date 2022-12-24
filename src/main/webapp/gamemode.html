@@ -142,10 +142,24 @@
 	  		}
 		}
 		
-		// Handle regular non iOS 13+ devices.
+		// Access device orientation on non-iOS
 		window.addEventListener('deviceorientation', handleOrientation, true);
-		window.addEventListener("MozOrientation", handleOrientation, true);			
 		
+	</script>
+	
+	<!-- Needed for iOS, only way to access the gyroscope -->
+	<button onclick='requestOrientationPermission();'>Start iOS</button>
+	
+	<script type="text/javascript">
+    function requestOrientationPermission(){
+        DeviceOrientationEvent.requestPermission()
+        .then(response => {
+            if (response == 'granted') {
+                
+            }
+        })
+        .catch(console.error)
+    }
 	</script>
 				
 </body>
