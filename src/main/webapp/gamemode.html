@@ -6,64 +6,25 @@
 </head>
 <body>
 <h2>Gamemode</h2>
-		
-   	<canvas id="gamemode" width="400" height="300" style="border:2px solid #000000; background-color: whit;">
-   		<!-- Getting the ball-values from the db and create the canvas-->
-		<script type="text/javascript">
-			setInterval(function(){ 
-				fetch('/BallOnPlate/gamemode/GamemodeServlet', {
-				    method: 'GET',
-				    headers: {
-				        'Accept': 'application/json',
-				    },
-				})
-				.then(response => response.text())
-				.then(text => {						
-							var posX = text.slice(0, 3);
-				    		var posY = text.slice(3);
-				    		
-				    		var c = document.getElementById("gamemode");
-							var ctx = c.getContext("2d");
-							ctx.fillStyle = "black";
-							ctx.beginPath();
-							ctx.arc(posX,posY,15,0,2*Math.PI);
-							ctx.fill();
-						}
-				) 
-			}, 100);										
-		</script>
-	</canvas>
 	
-	<!-- Testbereich -->
-<div id="canvas">
-  <div id="middle"></div>
-  <div id="ball"></div>
-</div>
-
-<style type="text/css">
-#canvas {
-     width: 360px;
-     height: 230px;
-     border: 5px solid #ddd;
-     border-radius: 10px;
-     -moz-border-radius: 10px;
-   }
-    #ball {
-     background-color: green;
-     position: relative;
-     width: 20px;
-     height: 20px;
-     left: 90px;
-     top: 90px;
-     border-radius: 20px;
-     -moz-border-radius: 20px;
-     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
-     -moz-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
-     -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
-     background-image: -moz-linear-gradient(top, rgba(255, 255, 255, .5), rgba(255, 255, 255, 0) 12px);
-     background-image: -webkit-gradient(linear, 0 0, 0 12, from(rgba(255, 255, 255, .5)), to(rgba(255, 255, 255, 0)));
-   }
-</style>	
+	<p id="result"></p>
+	
+	<!-- Get a new value every second and write it onto the screen -->
+	<script type="text/javascript">
+		setInterval(function(){ 
+			fetch('/BallOnPlate/gamemode/GamemodeServlet', {
+			    method: 'GET',
+			    headers: {
+			        'Accept': 'application/json',
+			    },
+			})
+			.then(response => response.text())
+			.then(text => {						
+				document.getElementById("result").innerHTML = text.slice(0, 3);
+				}
+			) 
+		}, 1000);										
+	</script>
 	
 	<!-- Setting the mode to gamemode and send the gyroscope values of the phone-->
 	<script type="text/javascript">

@@ -2,9 +2,6 @@ package ballonplate.servlet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
@@ -14,9 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ballonplate.data.DatabaseModelRepository;
-import ballonplate.model.DatabaseModel;
-import ballonplate.service.DatabaseModelRegistration;
+import ballonplate.data.DatabaseResultRepository;
+import ballonplate.model.DatabaseTouchpanel;
+import ballonplate.service.DatabaseTouchpanelRegistration;
 
 /**
  * Servlet implementation class GamemodeServlet
@@ -25,14 +22,14 @@ public class GamemodeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-    private DatabaseModelRepository repository;
+    private DatabaseResultRepository repository;
 	
 	@Inject
-    private DatabaseModelRegistration registration;
+    private DatabaseTouchpanelRegistration registration;
 	
 	@Produces
 	@Named
-	private DatabaseModel gameDatabaseModel;
+	private DatabaseTouchpanel gameDatabaseModel;
 	
     /**
      * Default constructor. 
@@ -41,9 +38,9 @@ public class GamemodeServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
     
-    // Read the values from the db and pass them in the format xxxyyy
+    // Read the values from the db and pass them in the format xxx
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append(Integer.toString(repository.getPosXReal())).append(Integer.toString(repository.getPosYReal()));
+		response.getWriter().append(Integer.toString(repository.getResult()));
 	}
 	
 	// Copyright by OneCricketeer and Adrian Ayala Torres (https://stackoverflow.com/a/14885950/16552518)
@@ -80,7 +77,7 @@ public class GamemodeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String postBody = getBody(request);
 		
-		gameDatabaseModel = new DatabaseModel();
+		gameDatabaseModel = new DatabaseTouchpanel();
 		gameDatabaseModel.setError(0);
 		gameDatabaseModel.setMode(1);
 		int posX, posY;

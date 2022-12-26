@@ -20,7 +20,7 @@
 		<!-- Define Class that is called everytime, the site is reloaded / called -->
 		<f:metadata>
     		<f:viewParam name="foo" value="#{bean.foo}" />
-    		<f:event type="preRenderView" listener="#{databaseModelController.startup}" />
+    		<f:event type="preRenderView" listener="#{databaseTouchpanelController.startup}" />
 		</f:metadata>
 		
 		<div class="left">
@@ -43,7 +43,7 @@
 	            <p>
 	                <h:panelGrid columns="1">
 	                        <h:commandButton id="register"
-	                        action="#{databaseModelController.register}"
+	                        action="#{databaseTouchpanelController.register}"
 	                        value="Register" styleClass="register" class="button button_register">
 	                        </h:commandButton>
 	                    <h:messages styleClass="messages"
@@ -96,13 +96,13 @@
 	        <div class="box_visualization">
 	    	<h2>Visualization</h2>
 	    	
-	        <div id="posX" data-variableid1="#{DatabaseModelRepository.getPosXReal()}"></div>
-	        <div id="posY" data-variableid2="#{DatabaseModelRepository.getPosYReal()}"></div>
+	        <div id="posX" data-variableid1="#{databaseTouchpanelRepository.getPosXReal()}"></div>
+	        <div id="posY" data-variableid2="#{DatabaseTouchpanelRepository.getPosYReal()}"></div>
 		
 		    	<a href="/BallOnPlate/gamemode.html"><canvas id="visualization" width="400" height="300" style="border:2px solid #000000; background-color: whit;">
 		    		<script type="text/javascript">
 			    		setInterval(function(){ 
-							fetch('/BallOnPlate/gamemode/GamemodeServlet', {
+							fetch('/BallOnPlate/TouchpanelServlet', {
 							    method: 'GET',
 							    headers: {
 							        'Accept': 'application/json',
