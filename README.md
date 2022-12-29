@@ -6,7 +6,9 @@
 	Alternative download from "https://gist.github.com/sukharevd/6087988"
 2. Execute "sudo bash wildfly-install.sh"
 3. Check status via "sudo systemctl status wildfly"
-4. Navigate to the new downloaded folder (not the one from GIT) to standalone/configuration and change the standalone.xml to the one, provided in Git
+4. Navigate to the new downloaded folder (not the one from GIT (BallOnPlateJava)) to standalone/configuration and change the standalone.xml to the one, provided in Git
+5. Copy the ssl / https certificate from "BallOnPlateJava" to the wildfly-folder/standalone/configuration
+	1. It could be that the certificate has exceeded it's period of validity, so you might create a new one (or request at "letsencrypt")
 5. Navigate to the bin-folder and execute "sudo bash add-user.sh"
 6. Start the server:
 
@@ -33,7 +35,7 @@
 1. Execute "sudo apt update" and "sudo apt full-upgrade"
 1. Execute "sudo apt install postgresql" to install
 2. Execute "sudo su postgres" to change to superuser
-3. Execute "createuser pi -P --interactive" to give your Raspberry admin-rights
+3. Execute "creatuser pi -p --interactive" to give your Raspberry admin-rights
 	Use Passwort BallOnPlateDSOwner
 4. Execute "psql"
 5. In the PostgreS cmd-line, execute "CREATE DATABASE pi;"
@@ -49,7 +51,6 @@
 	"WFLYSRV0010: Deployed "BallOnPlate.war" (runtime-name : "BallOnPlate.war")" is good, errors are bad
 4. Go to the web-console - "Deployments". There you should see "BallOnPlate.war".
 5. To open the application: click on "BallOnPlate.war" and use the the link provided (Context root)
-	- If you want to use the "gamemode", you have to use a https-connection --> https://ipv4:8443/...
 
 
 ### Note!
