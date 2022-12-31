@@ -45,48 +45,48 @@
 		  		gyroYOld = gyroY;
 	  			if(gyroX > 9){	//X consist of two digits (positive)
 		  			if(gyroY > 9){	//Y consist of two digits (positive)
-		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: +" + gyroY + " }"
+		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: +" + gyroY + "}"
 		  			} else if (gyroY >= 0){	//Y consist of one digit (positive)
-		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: +0" + gyroY + " }"
+		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: +0" + gyroY + "}"
 		  			} else if (gyroY < -9) { //Y consist of two digits (negative)
-		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: " + gyroY + " }"
+		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: " + gyroY + "}"
 		  			} else if (gyroY < 0) { //Y consist of one digit (negative)
 		  				gyroY = gyroY * (-1);
-		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: -0" + gyroY + " }"
+		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: -0" + gyroY + "}"
 		  			}
 		  		} else if(gyroX < -9) {	//X consist of two digits (negative)
 		  			if(gyroY > 9){
-		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: +" + gyroY + " }"
+		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: +" + gyroY + "}"
 		  			} else if (gyroY >= 0){
-		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: +0" + gyroY + " }"
+		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: +0" + gyroY + "}"
 		  			} else if (gyroY < -9) {
-		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: " + gyroY + " }"
+		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: " + gyroY + "}"
 		  			} else if (gyroY < 0) {
 		  				gyroY = gyroY * (-1);
-		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: -0" + gyroY + " }"
+		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: -0" + gyroY + "}"
 		  			}
 		  		} else if(gyroX >= 0){	//X consist of one digit (positive)
 		  			if(gyroY > 9){
-		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: +" + gyroY + " }"
+		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: +" + gyroY + "}"
 		  			} else if (gyroY >= 0){
-		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: +0" + gyroY + " }"
+		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: +0" + gyroY + "}"
 		  			} else if (gyroY < -9) {
-		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: " + gyroY + " }"
+		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: " + gyroY + "}"
 		  			} else if (gyroY < 0) {
 		  				gyroY = gyroY * (-1);
-		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: -0" + gyroY + " }"
+		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: -0" + gyroY + "}"
 		  			}
 		  		} else {	//X consist of one digit (negative)
 	  				gyroX = gyroX * (-1);
 		  			if(gyroY > 9){
-		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: +" + gyroY + " }"
+		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: +" + gyroY + "}"
 		  			} else if (gyroY >= 0){
-		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: +0" + gyroY + " }"
+		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: +0" + gyroY + "}"
 		  			} else if (gyroY < -9) {
-		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: " + gyroY + " }"
+		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: " + gyroY + "}"
 		  			} else if (gyroY < 0) {
 		  				gyroY = gyroY * (-1);
-		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: -0" + gyroY + " }"
+		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: -0" + gyroY + "}"
 		  			}
 		  		}
 	  		    
@@ -106,15 +106,42 @@
 		
 	</script>
 	
-	<!-- Needed for iOS, only way to access the gyroscope -->
-	<button onclick='requestOrientationPermission();'>Start iOS</button>
-	
 	<script type="text/javascript">
     function requestOrientationPermission(){
         DeviceOrientationEvent.requestPermission()
         .catch(console.error)
     }
 	</script>
+	
+	<!-- Needed for iOS, only way to access the gyroscope -->
+	<button onclick='requestOrientationPermission();'>Start iOS</button>
+	
+	<script type="text/javascript">
+    function setMode1(){
+    	fetch("/BallOnPlate/gamemode/GamemodeServlet", {
+    		  method: "POST",
+    		  headers: {
+    		    'Accept': 'application/json',
+    		    'Content-Type': 'application/json'
+    		  },
+    		  body: JSON.stringify(1)
+    		})
+    }
+    
+    function setMode2(){
+    	fetch("/BallOnPlate/gamemode/GamemodeServlet", {
+    		  method: "POST",
+    		  headers: {
+    		    'Accept': 'application/json',
+    		    'Content-Type': 'application/json'
+    		  },
+    		  body: JSON.stringify(2)
+    		})
+    }
+	</script>
+	
+	<button onclick='setMode1()'>Balancing</button>
+	<button onclick='setMode2()'>Labyrinth</button>
 				
 </body>
 </html>

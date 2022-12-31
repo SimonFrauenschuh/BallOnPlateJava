@@ -31,7 +31,7 @@ public class DatabaseResultRepository {
 	@Inject
 	private DatabaseResultListProducer DatabaseResultListProducer;
 
-	public DatabaseResult findById(Long id) {
+	public DatabaseResult findById(int id) {
 		return em.find(DatabaseResult.class, id);
 	}
 	
@@ -43,13 +43,13 @@ public class DatabaseResultRepository {
 		return em.createQuery(criteria).getResultList();
 	}
 	
-	private long findMaxId() {
+	private int findMaxId() {
 		List<DatabaseResult> list = DatabaseResultListProducer.getAllEntrys();
 		return list.size();
 	}
 	
 	public int getResult() {
-		long id = findMaxId();
+		int id = findMaxId();
 		return findById(id).getResult();
 	}
 }

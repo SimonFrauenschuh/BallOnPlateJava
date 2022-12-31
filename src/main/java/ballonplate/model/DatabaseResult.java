@@ -27,7 +27,7 @@ public class DatabaseResult implements Serializable{
 	
 	@Id
     @GeneratedValue
-    private Long id;
+    private int id;
 	
 	@NotNull
     private int result;
@@ -36,11 +36,11 @@ public class DatabaseResult implements Serializable{
     @Range(min = 0, max = 12)
     private int mode;
 	
-	public void setId(Long id) {
+	public void setId(int id) {
         this.id = id;
     }
 	
-	public Long getId() {
+	public int getId() {
         return id;
     }
     

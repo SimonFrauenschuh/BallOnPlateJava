@@ -42,9 +42,9 @@ public class DatabaseTouchpanelRESTService {
     }
 
     @GET
-    @Path("/{id:[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]*}")
+    @Path("/{id:[0-9][0-9][0-9][0-9][0-9]*}")
     @Produces(MediaType.APPLICATION_JSON)
-    public DatabaseTouchpanel lookupEntryById(@PathParam("id") long id) {
+    public DatabaseTouchpanel lookupEntryById(@PathParam("id") int id) {
     	DatabaseTouchpanel databaseModel = repository.findById(id);
         if (databaseModel == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);

@@ -30,7 +30,7 @@ public class DatabaseTouchpanelRepository {
 	@Inject
 	private DatabaseTouchpanelListProducer databaseTouchpanelListProducer;
 
-	public DatabaseTouchpanel findById(Long id) {
+	public DatabaseTouchpanel findById(int id) {
 		return em.find(DatabaseTouchpanel.class, id);
 	}
 	
@@ -42,28 +42,28 @@ public class DatabaseTouchpanelRepository {
 		return em.createQuery(criteria).getResultList();
 	}
 	
-	private long findMaxId() {
+	private int findMaxId() {
 		List<DatabaseTouchpanel> list = databaseTouchpanelListProducer.getAllEntrys();
 		return list.size();
 	}
 	
 	public int getPosXEst() {
-		long id = findMaxId();
+		int id = findMaxId();
 		return findById(id).getPositionXEst();
 	}
 
 	public int getPosYEst() {
-		long id = findMaxId();
+		int id = findMaxId();
 		return findById(id).getPositionYEst();
 	}
 	
 	public int getPosXReal() {
-		long id = findMaxId();
+		int id = findMaxId();
 		return findById(id).getPositionXReal();
 	}
 
 	public int getPosYReal() {
-		long id = findMaxId();
+		int id = findMaxId();
 		return findById(id).getPositionYReal();
 	}
 }

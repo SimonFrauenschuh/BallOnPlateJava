@@ -12,6 +12,18 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     template="/WEB-INF/templates/default.xhtml">
+    
+    <script type="text/javascript">
+   	fetch("/BallOnPlate/gamemode/TouchpanelServlet", {
+   		  method: "POST",
+   		  headers: {
+   		    'Accept': 'application/json',
+   		    'Content-Type': 'application/json'
+   		  },
+   		  body: JSON.stringify()
+   		})
+	</script>
+    
     <ui:define name="content">
     	<div class="h1_title">
        		<h1>Sisyphos 2.0</h1>

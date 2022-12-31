@@ -8,7 +8,7 @@
     http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
     <changeSet author="sfrauenschuh (generated)" id="1626763182512-1">    	
         <createTable tableName="postouchpanel">
-            <column  name="id" type="BIGINT">
+            <column  name="id" type="int">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="databaseModel_pkey"/>
             </column>
             <column name="xest" type="int">
@@ -21,9 +21,6 @@
                 <constraints nullable="false"/>
             </column>
             <column name="yreal" type="int">
-                <constraints nullable="false"/>
-            </column>
-            <column name="mode" type="int2">
                 <constraints nullable="false"/>
             </column>
             <column name="error" type="int2">
@@ -43,14 +40,13 @@
         	<column  name="yest"  value="150"/>
         	<column  name="xreal"  value="198"/>
         	<column  name="yreal"  value="155"/>
-        	<column  name="mode"  value="0"/>
         	<column  name="error"  value="0"/>
     	</insert>  
     </changeSet>
     
     <changeSet author="sfrauenschuh" id="1626763182512-4">    	
         <createTable tableName="result">
-            <column  name="id" type="BIGINT">
+            <column  name="id" type="int">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="result_pkey"/>
             </column>
             <column name="result" type="int">
