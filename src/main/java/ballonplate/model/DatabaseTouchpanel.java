@@ -45,10 +45,6 @@ public class DatabaseTouchpanel implements Serializable{
     @Range(min = -400, max = 400)
     private int yReal;
 	
-	@NotNull
-    @Range(min = 0, max = 12)
-    private int error;
-	
 	public void setId(int id) {
         this.id = id;
     }
@@ -87,13 +83,5 @@ public class DatabaseTouchpanel implements Serializable{
     
     public int getPositionYReal() {
         return yReal;
-    }
-    
-    public void setError(int error) {
-        this.error = error;
-    }
-    
-    public Integer getError() {
-        return error;
     }
 }

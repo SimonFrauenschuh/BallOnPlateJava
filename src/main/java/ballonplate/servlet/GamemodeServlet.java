@@ -88,7 +88,6 @@ public class GamemodeServlet extends HttpServlet {
 		// If new gyroscope-values are sent
 		if (postBody.charAt(0) == '"') {
 			gameDatabaseModel = new DatabaseTouchpanel();
-			gameDatabaseModel.setError(0);
 			int posX, posY;
 			if(postBody.charAt(11) == '-') {
 				posX = -Integer.parseInt("" + postBody.charAt(12) + postBody.charAt(13));
@@ -116,6 +115,7 @@ public class GamemodeServlet extends HttpServlet {
 			gameResultModel = new DatabaseResult();
 		    gameResultModel.setMode(1);
 		    gameResultModel.setResult(100);
+		    gameResultModel.setError(0);
 		    
 		    try {
 				registrationResult.register(gameResultModel);
@@ -125,6 +125,7 @@ public class GamemodeServlet extends HttpServlet {
 			gameResultModel = new DatabaseResult();
 		    gameResultModel.setMode(2);
 		    gameResultModel.setResult(100);
+		    gameResultModel.setError(0);
 		    
 		    try {
 				registrationResult.register(gameResultModel);

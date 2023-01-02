@@ -48,6 +48,7 @@ public class TouchpanelServlet extends HttpServlet {
 		normalResultModel = new DatabaseResult();
 		normalResultModel.setMode(0);
 		normalResultModel.setResult(0);
+		normalResultModel.setError(0);
 	    
 	    try {
 			registrationResult.register(normalResultModel);

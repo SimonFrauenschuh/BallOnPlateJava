@@ -23,9 +23,6 @@
             <column name="yreal" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="error" type="int2">
-                <constraints nullable="false"/>
-            </column>
         </createTable>
     </changeSet>
     
@@ -40,7 +37,6 @@
         	<column  name="yest"  value="150"/>
         	<column  name="xreal"  value="198"/>
         	<column  name="yreal"  value="155"/>
-        	<column  name="error"  value="0"/>
     	</insert>  
     </changeSet>
     
@@ -55,6 +51,9 @@
             <column name="mode" type="int2">
                 <constraints nullable="false"/>
             </column>
+            <column name="error" type="int2">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
     
@@ -63,6 +62,7 @@
         	<column  name="id"  value="1"/>
         	<column  name="result"  value="100"/>
         	<column  name="mode"  value="1"/>
+        	<column  name="error"  value="0"/>
     	</insert>  
     </changeSet>
 </databaseChangeLog>

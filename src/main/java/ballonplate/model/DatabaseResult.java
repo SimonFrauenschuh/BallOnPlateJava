@@ -36,6 +36,10 @@ public class DatabaseResult implements Serializable{
     @Range(min = 0, max = 12)
     private int mode;
 	
+	@NotNull
+    @Range(min = 0, max = 12)
+    private int error;
+	
 	public void setId(int id) {
         this.id = id;
     }
@@ -58,5 +62,13 @@ public class DatabaseResult implements Serializable{
     
     public Integer getResult() {
         return result;
+    }
+    
+    public void setError(int error) {
+        this.error = error;
+    }
+    
+    public Integer getError() {
+        return error;
     }
 }
