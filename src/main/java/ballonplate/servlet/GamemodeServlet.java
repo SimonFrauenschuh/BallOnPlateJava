@@ -115,7 +115,7 @@ public class GamemodeServlet extends HttpServlet {
 		else if (postBody.charAt(0) == '1') {
 			gameResultModel = new DatabaseResult();
 		    gameResultModel.setMode(1);
-		    gameResultModel.setResult(repositoryResult.getResult());
+		    gameResultModel.setResult(100);
 		    
 		    try {
 				registrationResult.register(gameResultModel);
@@ -124,7 +124,7 @@ public class GamemodeServlet extends HttpServlet {
 		else if (postBody.charAt(0) == '2') {
 			gameResultModel = new DatabaseResult();
 		    gameResultModel.setMode(2);
-		    gameResultModel.setResult(repositoryResult.getResult());
+		    gameResultModel.setResult(100);
 		    
 		    try {
 				registrationResult.register(gameResultModel);
