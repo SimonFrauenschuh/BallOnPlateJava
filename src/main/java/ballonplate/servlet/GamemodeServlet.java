@@ -104,8 +104,6 @@ public class GamemodeServlet extends HttpServlet {
 			gameDatabaseModel.setXReal(303);
 			gameDatabaseModel.setYReal(303);
 			
-			
-			
 			try {
 				databaseTouchpanelRegistration.register(gameDatabaseModel);
 			} catch (Exception e) {}
