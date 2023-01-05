@@ -19,7 +19,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import ballonplate.model.DatabaseResult;
-import ballonplate.model.DatabaseTouchpanel;
 
 @Named("DatabaseResultRepository")
 @ApplicationScoped
@@ -44,8 +43,7 @@ public class DatabaseResultRepository {
 	}
 	
 	private int findMaxId() {
-		List<DatabaseResult> list = DatabaseResultListProducer.getAllEntrys();
-		return list.size();
+		return DatabaseResultListProducer.getAllEntrys().get(0).getId();
 	}
 	
 	public int getResult() {

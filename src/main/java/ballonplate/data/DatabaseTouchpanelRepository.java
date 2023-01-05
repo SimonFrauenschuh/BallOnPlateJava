@@ -42,28 +42,28 @@ public class DatabaseTouchpanelRepository {
 		return em.createQuery(criteria).getResultList();
 	}
 	
-	private int findMaxId() {
-		List<DatabaseTouchpanel> list = databaseTouchpanelListProducer.getAllEntrys();
-		return list.size();
+	// Only way because of an unknown bug some ids don't get used
+	public int findMaxId() {
+		return databaseTouchpanelListProducer.getAllEntrys().get(0).getId();
 	}
 	
 	public int getPosXEst() {
 		int id = findMaxId();
-		return findById(id).getPositionXEst();
+		return findById(id).getXEst();
 	}
 
 	public int getPosYEst() {
 		int id = findMaxId();
-		return findById(id).getPositionYEst();
+		return findById(id).getYEst();
 	}
 	
 	public int getPosXReal() {
 		int id = findMaxId();
-		return findById(id).getPositionXReal();
+		return findById(id).getXReal();
 	}
 
 	public int getPosYReal() {
 		int id = findMaxId();
-		return findById(id).getPositionYReal();
+		return findById(id).getYReal();
 	}
 }

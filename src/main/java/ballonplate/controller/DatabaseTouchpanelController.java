@@ -16,7 +16,9 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import ballonplate.model.DatabaseResult;
 import ballonplate.model.DatabaseTouchpanel;
+import ballonplate.service.DatabaseResultRegistration;
 import ballonplate.service.DatabaseTouchpanelRegistration;
 
 // The @Model annotation is a convenience mechanism to make this a request-scoped bean that has an
@@ -30,11 +32,18 @@ public class DatabaseTouchpanelController {
     private FacesContext facesContext;
 	
 	@Inject
-    private DatabaseTouchpanelRegistration databaseModelRegistration;
+    private DatabaseTouchpanelRegistration databaseTouchpanelRegistration;
+	
+	@Inject
+    private DatabaseResultRegistration databaseResultRegistration;
 	
 	@Produces
 	@Named
 	private DatabaseTouchpanel newDatabaseModel;
+	
+	@Produces
+	@Named
+	private DatabaseResult newResultModel;
 	
 	@PostConstruct
     public void initNewDatabaseModel() {
@@ -42,13 +51,21 @@ public class DatabaseTouchpanelController {
     }
 
 	// Method to be called, whenever the site is reloaded / called
+	// Set the Mode to "0" (auto-balancing)
 	public void startup() throws Exception {
-		
+		newResultModel = new DatabaseResult();
+		newResultModel.setMode(0);
+		newResultModel.setResult(100);
+		newResultModel.setError(0);
+	    
+	    try {
+	    	databaseResultRegistration.register(newResultModel);
+		} catch (Exception e) {}
 	}
 	
 	public void register() throws Exception {
 		try {
-			databaseModelRegistration.register(newDatabaseModel);
+			databaseTouchpanelRegistration.register(newDatabaseModel);
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
             facesContext.addMessage(null, m);
             initNewDatabaseModel();

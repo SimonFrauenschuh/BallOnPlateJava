@@ -13,17 +13,6 @@
     xmlns:h="http://java.sun.com/jsf/html"
     template="/WEB-INF/templates/default.xhtml">
     
-    <script type="text/javascript">
-   	fetch("/BallOnPlate/gamemode/TouchpanelServlet", {
-   		  method: "POST",
-   		  headers: {
-   		    'Accept': 'application/json',
-   		    'Content-Type': 'application/json'
-   		  },
-   		  body: JSON.stringify()
-   		})
-	</script>
-    
     <ui:define name="content">
     	<div class="h1_title">
        		<h1>Sisyphos 2.0</h1>
@@ -44,11 +33,11 @@
 	            </div>
 	        	<h:panelGrid columns="3" columnClasses="titleCell">
 	                <h:outputLabel for="xPosition" value="xPosition: " />
-	                <h:inputText id="xPosition" value="#{newDatabaseModel.positionXEst}" />
+	                <h:inputText id="xPosition" value="#{newDatabaseModel.XEst}" />
 	                <h:message for="xPosition" errorClass="invalid" />
 	
 	                <h:outputLabel for="yPosition" value="yPosition: " />
-	                <h:inputText id="yPosition" value="#{newDatabaseModel.positionYEst}" />
+	                <h:inputText id="yPosition" value="#{newDatabaseModel.YEst}" />
 	                <h:message for="yPosition" errorClass="invalid" />
 	            </h:panelGrid>
 	
@@ -66,6 +55,30 @@
 	          </div>
         </h:form>
         
+        <!-- Get the values for the table -->
+        <script type="text/javascript">
+			setInterval(function(){ 
+				fetch('/BallOnPlate/rest/entrys/last', {
+					method: 'GET',
+					headers: {
+						'Accept': 'application/json',
+					},
+				})
+				.then(response => response.text())
+				.then(text => {		
+					var data = JSON.parse(text);
+					
+					var id = data.id;
+					var positionXReal = data.positionXReal;
+					var positionYReal = data.positionYReal;
+					var positionXEst = data.positionXEst;
+					var positionYEst = data.positionYEst;
+					}
+				)
+			 
+			}, 500);				
+		</script>
+        
         <div class="box_webView">
 	        <h2>Web View</h2>
 	        <h:panelGroup rendered="#{empty allEntrys}">
@@ -80,21 +93,21 @@
 	   	     	</h:column>
 	   	     	<h:column>
 	   	     		<f:facet name = "header">Position X Est</f:facet>
-	    	       	<h:outputText value="#{_databaseModel.positionXEst}" />
+	    	       	<h:outputText value="#{_databaseModel.XEst}" />
 	   	     	</h:column>
 	   	     	<h:column>
 	   	     		<f:facet name = "header">Position Y Est</f:facet>
 	   	     		<div align="center">
-	   	     			#{_databaseModel.positionYEst}
+	   	     			#{_databaseModel.YEst}
 	   	     		</div>
 	   	     	</h:column>
 	   	     	<h:column>
 	   	     		<f:facet name = "header">Position X Real</f:facet>
-	    	       	<h:outputText value="#{_databaseModel.positionXReal}" />
+	    	       	<h:outputText value="#{_databaseModel.XReal}" />
 	   	     	</h:column>
 	   	     	<h:column>
 	   	     		<f:facet name = "header">Position Y Real</f:facet>
-	    	       	<h:outputText value="#{_databaseModel.positionYReal}" />
+	    	       	<h:outputText value="#{_databaseModel.YReal}" />
 	   	     	</h:column>
 	    	</h:dataTable>
 	    	</div>
@@ -103,12 +116,12 @@
     
     
     <ui:define name="visualization">
-        	<!-- -->
         <div class="right">
 	        <div class="box_visualization">
 	    	<h2>Visualization</h2>		
 		    	<a href="/BallOnPlate/gamemode.html"><canvas id="visualization" width="400" height="300" style="border:2px solid #000000; background-color: whit;">
 		    		<script type="text/javascript">
+		    			// Get the values for the visualization
 			    		setInterval(function(){ 
 							fetch('/BallOnPlate/TouchpanelServlet', {
 							    method: 'GET',
@@ -129,7 +142,7 @@
 										ctx.fill();
 									}
 							) 
-						}, 100);				
+						}, 200);				
 					</script>
 				</canvas></a>
 			</div>
@@ -137,7 +150,6 @@
 		<form action="https://www.paypal.com/donate" method="post" target="_top">
 			<input type="hidden" name="hosted_button_id" value="RKCJMAWVDXHRS" />
 			<input type="image" src="https://www.paypalobjects.com/de_DE/AT/i/btn/btn_donateCC_LG.gif" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Spenden mit dem PayPal-Button" />
-			<img alt="" border="0" src="https://www.paypal.com/de_AT/i/scr/pixel.gif" width="1" height="1" />
 		</form>
 		</div>
     </ui:define>

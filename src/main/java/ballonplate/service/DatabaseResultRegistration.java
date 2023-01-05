@@ -14,26 +14,20 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import ballonplate.model.DatabaseResult;
-import ballonplate.model.DatabaseTouchpanel;
-
-import java.util.logging.Logger;
 
 // The @Stateless annotation eliminates the need for manual transaction demarcation
 @Stateless
 public class DatabaseResultRegistration {
 
 	@Inject
-	private Logger log;
-
-	@Inject
 	private EntityManager em;
 
 	@Inject
 	private Event<DatabaseResult> memberEventSrc;
-
+	
 	public void register(DatabaseResult databaseModel) throws Exception {
-		log.info("Registering " + databaseModel.getId());
 		em.persist(databaseModel);
+		em.flush();
 		memberEventSrc.fire(databaseModel);
 	}
 }

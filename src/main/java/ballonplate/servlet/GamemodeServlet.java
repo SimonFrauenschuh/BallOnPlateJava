@@ -24,10 +24,10 @@ public class GamemodeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-    private DatabaseResultRepository repositoryResult;
+    private DatabaseResultRepository databaseResultRepository;
 	
 	@Inject
-    private DatabaseTouchpanelRegistration registrationTouchpanel;
+    private DatabaseTouchpanelRegistration databaseTouchpanelRegistration;
 	
 	@Produces
 	@Named
@@ -49,7 +49,7 @@ public class GamemodeServlet extends HttpServlet {
     
     // Read the values from the db and pass them in the format xxx
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append(Integer.toString(repositoryResult.getResult()));
+		response.getWriter().append(Integer.toString(databaseResultRepository.getResult()));
 	}
 	
 	// Copyright by OneCricketeer and Adrian Ayala Torres (https://stackoverflow.com/a/14885950/16552518)
@@ -99,15 +99,15 @@ public class GamemodeServlet extends HttpServlet {
 			} else {
 				posY = Integer.parseInt("" + postBody.charAt(26) + postBody.charAt(27));
 			}
-			gameDatabaseModel.setPositionXEst(posX);
-			gameDatabaseModel.setPositionYEst(posY);
-			gameDatabaseModel.setPositionXReal(303);
-			gameDatabaseModel.setPositionYReal(303);
+			gameDatabaseModel.setXEst(posX);
+			gameDatabaseModel.setYEst(posY);
+			gameDatabaseModel.setXReal(303);
+			gameDatabaseModel.setYReal(303);
 			
 			
 			
 			try {
-				registrationTouchpanel.register(gameDatabaseModel);
+				databaseTouchpanelRegistration.register(gameDatabaseModel);
 			} catch (Exception e) {}
 		}
 		// If gamemode 1 (standard balancing) is selected

@@ -53,35 +53,35 @@ public class DatabaseTouchpanel implements Serializable{
         return id;
     }
     
-	public void setPositionXEst(int xEst) {
+	public void setXEst(int xEst) {
         this.xEst = xEst;
     }
 	
-    public int getPositionXEst() {
+    public int getXEst() {
         return xEst;
     }
     
-    public void setPositionYEst(int yEst) {
+    public void setYEst(int yEst) {
         this.yEst = yEst;
     }
     
-    public int getPositionYEst() {
+    public int getYEst() {
         return yEst;
     }
     
-    public void setPositionXReal(int xReal) {
+    public void setXReal(int xReal) {
         this.xReal = xReal;
     }
 	
-    public int getPositionXReal() {
+    public int getXReal() {
         return xReal;
     }
     
-    public void setPositionYReal(int yReal) {
+    public void setYReal(int yReal) {
         this.yReal = yReal;
     }
     
-    public int getPositionYReal() {
+    public int getYReal() {
         return yReal;
     }
 }

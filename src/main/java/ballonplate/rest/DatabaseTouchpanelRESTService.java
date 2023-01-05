@@ -51,6 +51,17 @@ public class DatabaseTouchpanelRESTService {
         }
         return databaseModel;
     }
+    
+    @GET
+    @Path("/last")
+    @Produces(MediaType.APPLICATION_JSON)
+    public DatabaseTouchpanel lookupLastEntry() {
+    	DatabaseTouchpanel databaseModel = repository.findById(repository.findMaxId());
+        if (databaseModel == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        return databaseModel;
+    }
 
     
 }

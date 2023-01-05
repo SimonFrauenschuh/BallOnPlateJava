@@ -21,7 +21,7 @@ public class TouchpanelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-    private DatabaseTouchpanelRepository repositoryTouchpanel;
+    private DatabaseTouchpanelRepository databaseTouchpanelRepository;
 	
 	@Inject
     private DatabaseResultRegistration registrationResult;
@@ -40,7 +40,7 @@ public class TouchpanelServlet extends HttpServlet {
     
     // Read the values from the db and pass them in the format xxxyyy
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append(Integer.toString(repositoryTouchpanel.getPosXReal())).append(Integer.toString(repositoryTouchpanel.getPosYReal()));
+		response.getWriter().append(Integer.toString(databaseTouchpanelRepository.getPosXReal())).append(Integer.toString(databaseTouchpanelRepository.getPosYReal()));
 	}
 	
 	// Extract the data from the POST-Request and store it into the db
