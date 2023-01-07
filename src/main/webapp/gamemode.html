@@ -1,30 +1,122 @@
+<!--
+ * Copyright (C) 2021 Simon Frauenschuh - All Rights Reserved
+ * You may use and / or modify this code in
+ * terms of private use.
+ * Any caused damage or misbehaviour of any components are
+ * under the responsibility of the user and and the editor
+ * cannot be prosecuted for it
+ *
+ -->
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Gamemode</title>
+	<meta charset="ISO-8859-1">
+	<title>Gamemode</title>
+	
+	<style>
+		.headline{
+			font-size: 40px;
+			display: flex;
+			justify-content: center;
+			color: rgb(255, 252, 56);
+  			text-shadow: 0 0 15px rgb(255, 252, 56), 0 0 25px rgb(255, 252, 56);
+  			animation: glow 4s linear infinite;
+		}
+		
+		@keyframes glow {
+			0% {
+				filter: hue-rotate(0deg);
+			}
+			100% {
+				filter: hue-rotate(360deg);
+			}
+		}
+		
+		.box_accuracy{
+		 	text-align: center;
+   			height: auto;
+		    width: 400px;
+		    background: rgba(173, 216, 230, 0.7);
+		    border-radius: 10px;
+		    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+		}
+
+		.box_mode{
+		 	text-align: center;
+   			height: 90px;
+		    width: 400px;
+		    background: rgba(173, 216, 230, 0.7);
+		    border-radius: 10px;
+		    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+		}
+
+		.button {
+	  		padding: 10px 20px;
+	  		text-align: center;
+	  		text-decoration: none;
+	  		display: inline-block;
+	  		font-size: 16px;
+	  		transition-duration: 0.4s;
+	  		cursor: pointer;
+		}
+		
+		.bnt_return {
+			background-color: white; 
+			color: black;
+			margin-top: 5%;
+			margin-left: 78.5%;
+			align-items: center;
+			border: 2px solid #008CBA;
+			border-radius: 10px;
+		}
+		
+		.bnt_return:hover {
+			background-color: #008CBA;
+			color: white;
+		}
+		
+
+		.btn_balancing {
+			background-color: white; 
+			color: black; 
+			margin-left: auto;
+			border: 2px solid #EE4040;
+			border-radius: 10px;
+		}
+		
+		.btn_balancing:hover {
+			background-color: #EE4040;
+			color: white;
+		}
+		
+		.btn_labyrinth {
+			background-color: white; 
+			color: black; 
+			margin-left: 20%;
+			border: 2px solid #3BBFEA;
+			border-radius: 10px;
+		}
+		
+		.btn_labyrinth:hover {
+			background-color: #3BBFEA;
+			color: white;
+		}
+		
+		.left { 
+			float: left;
+			width: auto;
+		}
+
+		.right { 
+			float: right;
+			width: auto;
+		}
+	</style>
+	
 </head>
 <body>
-<h2>Gamemode</h2>
-	
-	<p id="result"></p>
-	
-	<!-- Get a new value every second and write it onto the screen -->
-	<script type="text/javascript">
-		setInterval(function(){ 
-			fetch('/BallOnPlate/gamemode/GamemodeServlet', {
-			    method: 'GET',
-			    headers: {
-			        'Accept': 'application/json',
-			    },
-			})
-			.then(response => response.text())
-			.then(text => {						
-				document.getElementById("result").innerHTML = text.slice(0, 3);
-				}
-			) 
-		}, 1000);										
-	</script>
+<h2 class="headline">Gamemode</h2>
 	
 	<!-- Setting the mode to gamemode and send the gyroscope values of the phone-->
 	<script type="text/javascript">
@@ -114,9 +206,6 @@
     }
 	</script>
 	
-	<!-- Needed for iOS, only way to access the gyroscope -->
-	<button onclick='requestOrientationPermission();'>Start iOS</button>
-	
 	<script type="text/javascript">
     function setMode1(){
     	fetch("/BallOnPlate/gamemode/GamemodeServlet", {
@@ -141,8 +230,42 @@
     }
 	</script>
 	
-	<button onclick='setMode1()'>Balancing</button>
-	<button onclick='setMode2()'>Labyrinth</button>
+	<div class="left">
+		<div class="box_accuracy">
+			<h3>Accuracy:</h3>
+			<h3 id="result"></h3>
+		</div>
+	</div>
+
+	<!-- Get a new value every second and write it onto the screen -->
+	<script type="text/javascript">
+		setInterval(function(){ 
+			fetch('/BallOnPlate/gamemode/GamemodeServlet', {
+			    method: 'GET',
+			    headers: {
+			        'Accept': 'application/json',
+			    },
+			})
+			.then(response => response.text())
+			.then(text => {						
+				document.getElementById("result").innerHTML = text.slice(0, 3);
+				}
+			) 
+		}, 1000);										
+	</script>
+	
+	<div class="right">
+		<div class="box_mode">
+			<h3>Mode:</h3>
+			<!-- "onclick='requestOrientationPermission();" for iOS, only way to access the gyroscope -->
+			<button class="button btn_balancing" onclick='requestOrientationPermission(); setMode1()'>Balancing</button>
+			<button class="button btn_labyrinth" onclick='requestOrientationPermission(); setMode2()'>Labyrinth</button>
+		</div>
+			<a href="/BallOnPlate">
+				<button class="button bnt_return">Home</button>
+			</a>
+	</div>
+
 				
 </body>
 </html>

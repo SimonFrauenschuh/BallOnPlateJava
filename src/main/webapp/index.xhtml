@@ -14,9 +14,11 @@
     template="/WEB-INF/templates/default.xhtml">
     
     <ui:define name="content">
+		<img class="picture_logo" src="https://raw.githubusercontent.com/SimonFrauenschuh/BallOnPlateJava/67ea06b050bd746e42c756ceeac2fd0bb7741a9f/src/main/resources/Logo_Sisyphos2.png" alt="Logo Sisyphos 2.0">
+        </img>
     	<div class="h1_title">
        		<h1>Sisyphos 2.0</h1>
-            <p>Diploma Work of Sebastian Haider and Simon Frauenschuh</p>
+            <p>Diploma Work of Simon Frauenschuh and Sebastian Haider</p>
         </div>
 		<!-- Define Class that is called everytime, the site is reloaded / called -->
 		<f:metadata>
@@ -118,33 +120,35 @@
     <ui:define name="visualization">
         <div class="right">
 	        <div class="box_visualization">
-	    	<h2>Visualization</h2>		
-		    	<a href="/BallOnPlate/gamemode.html"><canvas id="visualization" width="400" height="300" style="border:2px solid #000000; background-color: whit;">
-		    		<script type="text/javascript">
-		    			// Get the values for the visualization
-			    		setInterval(function(){ 
-							fetch('/BallOnPlate/TouchpanelServlet', {
-							    method: 'GET',
-							    headers: {
-							        'Accept': 'application/json',
-							    },
-							})
-							.then(response => response.text())
-							.then(text => {						
-										var posX = text.slice(0, 3);
-							    		var posY = text.slice(3);
-							    		
-							    		var c = document.getElementById("visualization");
-										var ctx = c.getContext("2d");
-										ctx.fillStyle = "black";
-										ctx.beginPath();
-										ctx.arc(posX,posY,15,0,2*Math.PI);
-										ctx.fill();
-									}
-							) 
-						}, 200);				
-					</script>
-				</canvas></a>
+	    		<h2>Visualization</h2>		
+			    	<a href="/BallOnPlate/gamemode.html">
+			    		<canvas id="visualization" style="border:2px solid #000000; background-color: whit;" width="365" height="235">
+				    		<script type="text/javascript">
+				    			// Get the values for the visualization
+					    		setInterval(function(){ 
+									fetch('/BallOnPlate/TouchpanelServlet', {
+									    method: 'GET',
+									    headers: {
+									        'Accept': 'application/json',
+									    },
+									})
+									.then(response => response.text())
+									.then(text => {						
+												var posX = text.slice(0, 3);
+									    		var posY = text.slice(3);
+									    		
+									    		var c = document.getElementById("visualization");
+												var ctx = c.getContext("2d");
+												ctx.fillStyle = "black";
+												ctx.beginPath();
+												ctx.arc(posX,posY,15,0,2*Math.PI);
+												ctx.fill();
+											}
+									) 
+								}, 200);				
+							</script>
+						</canvas>
+					</a>
 			</div>
 		<h4>Wir freuen uns über jede Unterstützung</h4>
 		<form action="https://www.paypal.com/donate" method="post" target="_top">
