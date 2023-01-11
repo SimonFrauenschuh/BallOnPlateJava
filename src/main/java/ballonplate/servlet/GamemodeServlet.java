@@ -49,7 +49,15 @@ public class GamemodeServlet extends HttpServlet {
     
     // Read the values from the db and pass them in the format xxx
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append(Integer.toString(databaseResultRepository.getResult()));
+		int mode = databaseResultRepository.getMode();
+		if(mode == 1) {
+			response.getWriter().append(Integer.toString(databaseResultRepository.getResult()));
+		} else if (mode == 2) {
+			int result = databaseResultRepository.getResult();
+			// Convert the result to the format: SS,Ms
+			// e.g. like 12,3s
+			response.getWriter().append(Integer.toString((result / 100) % 10) + Integer.toString((result / 10) % 10) + "," + Integer.toString(result % 10) + "s");
+		}
 	}
 	
 	// Copyright by OneCricketeer and Adrian Ayala Torres (https://stackoverflow.com/a/14885950/16552518)
