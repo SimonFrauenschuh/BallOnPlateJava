@@ -44,15 +44,15 @@
 	            </h:panelGrid>
 	
 	            <p>
-	                <h:panelGrid columns="1">
-	                        <h:commandButton id="register"
-	                        action="#{databaseTouchpanelController.register}"
-	                        value="Register" styleClass="register" class="button button_register">
-	                        </h:commandButton>
-	                    <h:messages styleClass="messages"
-	                        errorClass="invalid" infoClass="valid"
-	                        warnClass="warning" globalOnly="true" />
-	                </h:panelGrid>
+	            <h:panelGrid columns="1">
+	                    <h:commandButton id="register"
+	                    action="#{databaseTouchpanelController.register}"
+	                    value="Register" styleClass="register" class="button button_register">
+	                    </h:commandButton>
+	                <h:messages styleClass="messages"
+	                    errorClass="invalid" infoClass="valid"
+	                    warnClass="warning" globalOnly="true" />
+	            </h:panelGrid>
 	            </p>
 	          </div>
         </h:form>
@@ -71,47 +71,42 @@
 					var data = JSON.parse(text);
 					
 					var id = data.id;
-					var positionXReal = data.positionXReal;
-					var positionYReal = data.positionYReal;
-					var positionXEst = data.positionXEst;
-					var positionYEst = data.positionYEst;
+					var positionXReal = data.xreal;
+					var positionYReal = data.yreal;
+					var positionXEst = data.xest;
+					var positionYEst = data.yest;
+					
+					document.getElementById('rId').innerHTML = id;
+					document.getElementById('rPosXest').innerHTML = positionXEst;
+					document.getElementById('rPosYest').innerHTML = positionYEst;
+					document.getElementById('rPosXre').innerHTML = positionXReal;
+					document.getElementById('rPosYre').innerHTML = positionYReal;
+
 					}
 				)
 			 
-			}, 500);				
+			}, 500);
 		</script>
         
         <div class="box_webView">
 	        <h2>Web View</h2>
-	        <h:panelGroup rendered="#{empty allEntrys}">
-	            <em>No registered values</em>
-	        </h:panelGroup>
-	        <h:dataTable var="_databaseModel" value="#{allEntrys}"
-	        	rendered="#{not empty allEntrys}"
-		        styleClass="compact">
-		        <h:column>
-	   	     		<f:facet name = "header">ID</f:facet>
-	    	       	<h:outputText value="#{_databaseModel.id}" />
-	   	     	</h:column>
-	   	     	<h:column>
-	   	     		<f:facet name = "header">Position X Est</f:facet>
-	    	       	<h:outputText value="#{_databaseModel.XEst}" />
-	   	     	</h:column>
-	   	     	<h:column>
-	   	     		<f:facet name = "header">Position Y Est</f:facet>
-	   	     		<div align="center">
-	   	     			#{_databaseModel.YEst}
-	   	     		</div>
-	   	     	</h:column>
-	   	     	<h:column>
-	   	     		<f:facet name = "header">Position X Real</f:facet>
-	    	       	<h:outputText value="#{_databaseModel.XReal}" />
-	   	     	</h:column>
-	   	     	<h:column>
-	   	     		<f:facet name = "header">Position Y Real</f:facet>
-	    	       	<h:outputText value="#{_databaseModel.YReal}" />
-	   	     	</h:column>
-	    	</h:dataTable>
+
+	    	<table id="TableWebView">
+	    		<tr>
+	    			<th>ID</th>
+	    			<th>Position X Est</th>
+	    			<th>Position Y Est</th>
+	    			<th>Position X Real</th>
+	    			<th>Position Y Real</th>
+	    		</tr>
+				<tr>
+					<td><span id="rId"></span></td>
+					<td><span id="rPosXest"></span></td>
+					<td><span id="rPosYest"></span></td>
+					<td><span id="rPosXre"></span></td>
+					<td><span id="rPosYre"></span></td>
+				</tr>
+	    	</table>
 	    	</div>
     	</div>
     </ui:define>
@@ -122,7 +117,7 @@
 	        <div class="box_visualization">
 	    		<h2>Visualization</h2>		
 			    	<a href="/BallOnPlate/gamemode.html">
-			    		<canvas id="visualization" style="border:2px solid #000000; background-color: whit;" width="365" height="235">
+			    		<canvas id="visualization" style="border:2px solid #000000; background-color: white;" width="365" height="235">
 				    		<script type="text/javascript">
 				    			// Get the values for the visualization
 					    		setInterval(function(){ 
