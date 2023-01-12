@@ -7,16 +7,36 @@
  * cannot be prosecuted for it
  *
  -->
-
 <!DOCTYPE html>
-<html>
-<head>
+<html data-lt-installed="true"><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
 	<meta charset="ISO-8859-1">
 	<title>Gamemode</title>
 	
 	<style>
-		.headline{
-			font-size: 40px;
+		body, html {
+			margin: 0;
+			height: 100vh;
+			width: 100vw;
+			background: linear-gradient(#9BB5FA, #9BFAD9);
+			overflow: auto;
+		}
+		
+		.picture_logo {
+			width: 100px;
+			height: 100px;
+			margin-left: 5%;
+			margin-top: 5%;
+		}
+
+		.headlineAccuracy {
+			font-size: 25px;
+			margin: 0;
+			padding: 0;
+		}
+
+		.headlineMode {
+			font-size: 25px;
 			display: flex;
 			justify-content: center;
 			color: rgb(255, 252, 56);
@@ -33,22 +53,26 @@
 			}
 		}
 		
-		.box_accuracy{
-		 	text-align: center;
-   			height: auto;
-		    width: 400px;
+		.box_accuracy {
+			position: fixed;
+  			top: 50%;
+  			left: 50%;
+  			transform: translate(-50%, -50%);
+			text-align: center;
+   			height: 70px;
+		    width: 160px;
 		    background: rgba(173, 216, 230, 0.7);
 		    border-radius: 10px;
-		    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+		    box-shadow: 5px 5px 10px rgb(70, 70, 70);
 		}
 
-		.box_mode{
+		.box_mode {
 		 	text-align: center;
-   			height: 90px;
-		    width: 400px;
+   			height: 162px;
+		    width: 160px;
 		    background: rgba(173, 216, 230, 0.7);
 		    border-radius: 10px;
-		    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+		    box-shadow: 5px 5px 10px rgb(70, 70, 70);
 		}
 
 		.button {
@@ -65,14 +89,14 @@
 			background-color: white; 
 			color: black;
 			margin-top: 5%;
-			margin-left: 78.5%;
+			margin-left: 8%;
 			align-items: center;
-			border: 2px solid #008CBA;
+			border: 2px solid #000000;
 			border-radius: 10px;
 		}
 		
 		.bnt_return:hover {
-			background-color: #008CBA;
+			background-color: #000000;
 			color: white;
 		}
 		
@@ -80,26 +104,25 @@
 		.btn_balancing {
 			background-color: white; 
 			color: black; 
-			margin-left: auto;
-			border: 2px solid #EE4040;
-			border-radius: 10px;
+			border: 2px solid #9BB5FA;
+			border-radius: 15px;
 		}
 		
 		.btn_balancing:hover {
-			background-color: #EE4040;
+			background-color: #9BB5FA;
 			color: white;
 		}
 		
 		.btn_labyrinth {
 			background-color: white; 
 			color: black; 
-			margin-left: 20%;
-			border: 2px solid #3BBFEA;
-			border-radius: 10px;
+			margin-top: 10%;
+			border: 2px solid #9BFAD9;
+			border-radius: 15px;
 		}
 		
 		.btn_labyrinth:hover {
-			background-color: #3BBFEA;
+			background-color: #9BFAD9;
 			color: white;
 		}
 		
@@ -116,11 +139,45 @@
 	
 </head>
 <body>
-<h2 class="headline">Gamemode</h2>
-	
-	<!-- Setting the mode to gamemode and send the gyroscope values of the phone-->
+	<div class="left">
+		<img class="picture_logo" src="https://raw.githubusercontent.com/SimonFrauenschuh/BallOnPlateJava/67ea06b050bd746e42c756ceeac2fd0bb7741a9f/src/main/resources/Logo_Sisyphos2.png" alt="Logo Sisyphos 2.0">
+        </img>
+		<a href="/Sisyphos">
+			<button class="button bnt_return">Home</button>
+		</a>
+	</div>
+	<div>
+		<div class="box_accuracy">
+			<h3 class="headlineAccuracy">Accuracy:</h3>
+			<h3 id="result" style="font-size: 35px; margin: 0;">100</h3>
+		</div>
+	</div>
+	<div class="right">
+		<div class="box_mode">
+			<h3 class="headlineMode">Mode:</h3>
+			<!-- "onclick='requestOrientationPermission();" for iOS, only way to access the gyroscope -->
+			<button class="button btn_balancing" onclick="requestOrientationPermission(); setMode1()">Balancing</button>
+			<button class="button btn_labyrinth" onclick="requestOrientationPermission(); setMode2()">Labyrinth</button>
+		</div>
+	</div>
+
 	<script type="text/javascript">
-	
+		// Get a new value every second and write it onto the screen
+		setInterval(function(){ 
+			fetch('/Sisyphos/gamemode/GamemodeServlet', {
+			    method: 'GET',
+			    headers: {
+			        'Accept': 'application/json',
+			    },
+			})
+			.then(response => response.text())
+			.then(text => {						
+				document.getElementById("result").innerHTML = text.slice(0, 3);
+				}
+			) 
+		}, 1000);										
+
+		// Setting the mode to gamemode and send the gyroscope values of the phone
 		var gyroXOld = 0;
 		var gyroYOld = 0;
 	
@@ -196,19 +253,14 @@
 		
 		// Access device orientation on non-iOS
 		window.addEventListener('deviceorientation', handleOrientation, true);
-		
-	</script>
-	
-	<script type="text/javascript">
-    function requestOrientationPermission(){
+
+    	function requestOrientationPermission(){
         DeviceOrientationEvent.requestPermission()
         .catch(console.error)
-    }
-	</script>
-	
-	<script type="text/javascript">
-    function setMode1(){
-    	fetch("/Sisyphos/gamemode/GamemodeServlet", {
+    	}
+
+    	function setMode1(){
+    		fetch("/Sisyphos/gamemode/GamemodeServlet", {
     		  method: "POST",
     		  headers: {
     		    'Accept': 'application/json',
@@ -216,10 +268,10 @@
     		  },
     		  body: JSON.stringify(1)
     		})
-    }
+    	}
     
-    function setMode2(){
-    	fetch("/Sisyphos/gamemode/GamemodeServlet", {
+    	function setMode2(){
+    		fetch("/Sisyphos/gamemode/GamemodeServlet", {
     		  method: "POST",
     		  headers: {
     		    'Accept': 'application/json',
@@ -227,45 +279,7 @@
     		  },
     		  body: JSON.stringify(2)
     		})
-    }
-	</script>
-	
-	<div class="left">
-		<div class="box_accuracy">
-			<h3>Accuracy:</h3>
-			<h3 id="result"></h3>
-		</div>
-	</div>
-
-	<!-- Get a new value every second and write it onto the screen -->
-	<script type="text/javascript">
-		setInterval(function(){ 
-			fetch('/Sisyphos/gamemode/GamemodeServlet', {
-			    method: 'GET',
-			    headers: {
-			        'Accept': 'application/json',
-			    },
-			})
-			.then(response => response.text())
-			.then(text => {						
-				document.getElementById("result").innerHTML = text.slice(0, 5);
-				}
-			) 
-		}, 1000);										
-	</script>
-	
-	<div class="right">
-		<div class="box_mode">
-			<h3>Mode:</h3>
-			<!-- "onclick='requestOrientationPermission();" for iOS, only way to access the gyroscope -->
-			<button class="button btn_balancing" onclick='requestOrientationPermission(); setMode1()'>Balancing</button>
-			<button class="button btn_labyrinth" onclick='requestOrientationPermission(); setMode2()'>Labyrinth</button>
-		</div>
-			<a href="/Sisyphos">
-				<button class="button bnt_return">Home</button>
-			</a>
-	</div>
-
-				
+   		}
+	</script>			
 </body>
 </html>
