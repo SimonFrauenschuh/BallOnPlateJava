@@ -110,7 +110,7 @@
   </dependencies>
   
   <build>
-    <finalName>BallOnPlate</finalName>
+    <finalName>Sisyphos</finalName>
     <plugins>
          <plugin>
             <groupId>org.apache.maven.plugins</groupId>

@@ -183,7 +183,7 @@
 		  			}
 		  		}
 	  		    
-				fetch('/BallOnPlate/gamemode/GamemodeServlet', {
+				fetch('/Sisyphos/gamemode/GamemodeServlet', {
 					method: 'POST',
 					headers: {
 						'Accept': 'application/json',
@@ -208,7 +208,7 @@
 	
 	<script type="text/javascript">
     function setMode1(){
-    	fetch("/BallOnPlate/gamemode/GamemodeServlet", {
+    	fetch("/Sisyphos/gamemode/GamemodeServlet", {
     		  method: "POST",
     		  headers: {
     		    'Accept': 'application/json',
@@ -219,7 +219,7 @@
     }
     
     function setMode2(){
-    	fetch("/BallOnPlate/gamemode/GamemodeServlet", {
+    	fetch("/Sisyphos/gamemode/GamemodeServlet", {
     		  method: "POST",
     		  headers: {
     		    'Accept': 'application/json',
@@ -240,7 +240,7 @@
 	<!-- Get a new value every second and write it onto the screen -->
 	<script type="text/javascript">
 		setInterval(function(){ 
-			fetch('/BallOnPlate/gamemode/GamemodeServlet', {
+			fetch('/Sisyphos/gamemode/GamemodeServlet', {
 			    method: 'GET',
 			    headers: {
 			        'Accept': 'application/json',
@@ -261,7 +261,7 @@
 			<button class="button btn_balancing" onclick='requestOrientationPermission(); setMode1()'>Balancing</button>
 			<button class="button btn_labyrinth" onclick='requestOrientationPermission(); setMode2()'>Labyrinth</button>
 		</div>
-			<a href="/BallOnPlate">
+			<a href="/Sisyphos">
 				<button class="button bnt_return">Home</button>
 			</a>
 	</div>

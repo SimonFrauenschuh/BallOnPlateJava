@@ -60,7 +60,7 @@
         <!-- Get the values for the table -->
         <script type="text/javascript">
 			setInterval(function(){ 
-				fetch('/BallOnPlate/rest/entrys/last', {
+				fetch('/Sisyphos/rest/entrys/last', {
 					method: 'GET',
 					headers: {
 						'Accept': 'application/json',
@@ -116,12 +116,12 @@
         <div class="right">
 	        <div class="box_visualization">
 	    		<h2>Visualization</h2>		
-			    	<a href="/BallOnPlate/gamemode.html">
+			    	<a href="/Sisyphos/gamemode.html">
 			    		<canvas id="visualization" style="border:2px solid #000000; background-color: white;" width="365" height="235">
 				    		<script type="text/javascript">
 				    			// Get the values for the visualization
 					    		setInterval(function(){ 
-									fetch('/BallOnPlate/TouchpanelServlet', {
+									fetch('/Sisyphos/TouchpanelServlet', {
 									    method: 'GET',
 									    headers: {
 									        'Accept': 'application/json',
