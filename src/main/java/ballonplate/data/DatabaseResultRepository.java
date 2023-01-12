@@ -50,4 +50,9 @@ public class DatabaseResultRepository {
 		int id = findMaxId();
 		return findById(id).getResult();
 	}
+	
+	public int getMode() {
+		int id = findMaxId();
+		return findById(id).getMode();
+	}
 }
