@@ -68,7 +68,7 @@
 
 		.box_mode {
 		 	text-align: center;
-   			height: 162px;
+   			height: 220px;
 		    width: 160px;
 		    background: rgba(173, 216, 230, 0.7);
 		    border-radius: 10px;
@@ -83,6 +83,19 @@
 	  		font-size: 16px;
 	  		transition-duration: 0.4s;
 	  		cursor: pointer;
+		}
+		
+		.bnt_iOS {
+			background-color: white; 
+			color: black;
+			margin-top: 10%;
+			border: 2px solid #E0C3B6;
+			border-radius: 15px;
+		}
+
+		.bnt_iOS:hover {
+			background-color: #E0C3B6;
+			color: white;
 		}
 		
 		.bnt_return {
@@ -104,12 +117,12 @@
 		.btn_balancing {
 			background-color: white; 
 			color: black; 
-			border: 2px solid #9BB5FA;
+			border: 2px solid #A3E089;
 			border-radius: 15px;
 		}
 		
 		.btn_balancing:hover {
-			background-color: #9BB5FA;
+			background-color: #A3E089;
 			color: white;
 		}
 		
@@ -117,12 +130,12 @@
 			background-color: white; 
 			color: black; 
 			margin-top: 10%;
-			border: 2px solid #9BFAD9;
+			border: 2px solid #9FA2E0;
 			border-radius: 15px;
 		}
 		
 		.btn_labyrinth:hover {
-			background-color: #9BFAD9;
+			background-color: #9FA2E0;
 			color: white;
 		}
 		
@@ -141,23 +154,23 @@
 <body>
 	<div class="left">
 		<img class="picture_logo" src="https://raw.githubusercontent.com/SimonFrauenschuh/BallOnPlateJava/67ea06b050bd746e42c756ceeac2fd0bb7741a9f/src/main/resources/Logo_Sisyphos2.png" alt="Logo Sisyphos 2.0">
-        </img>
-		<a href="/Sisyphos">
+		<a href="http://127.0.0.1:8080/Sisyphos">
 			<button class="button bnt_return">Home</button>
 		</a>
 	</div>
 	<div>
 		<div class="box_accuracy">
 			<h3 class="headlineAccuracy">Accuracy:</h3>
-			<h3 id="result" style="font-size: 35px; margin: 0;">100</h3>
+			<h3 id="result" style="font-size: 35px; margin: 0;"></h3>
 		</div>
 	</div>
 	<div class="right">
 		<div class="box_mode">
 			<h3 class="headlineMode">Mode:</h3>
-			<!-- "onclick='requestOrientationPermission();" for iOS, only way to access the gyroscope -->
-			<button class="button btn_balancing" onclick="requestOrientationPermission(); setMode1()">Balancing</button>
-			<button class="button btn_labyrinth" onclick="requestOrientationPermission(); setMode2()">Labyrinth</button>
+			<button class="button btn_balancing" onclick="setMode1();">Balancing</button>
+			<button class="button btn_labyrinth" onclick="setMode2();">Labyrinth</button>
+			<!-- Needed for iOS, only way to access the gyroscope -->
+		<button class="button bnt_iOS" onclick="requestOrientationPermission();">Start iOS</button>
 		</div>
 	</div>
 
