@@ -7,20 +7,45 @@
     http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd
     http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
     <changeSet author="sfrauenschuh (generated)" id="1626763182512-1">    	
-        <createTable tableName="databasemodel">
-            <column  name="id" type="BIGINT">
+        <createTable tableName="postouchpanel">
+            <column  name="id" type="int">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="databaseModel_pkey"/>
             </column>
-            <column name="positionxest" type="int">
+            <column name="xest" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="positionyest" type="int">
+            <column name="yest" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="positionxreal" type="int">
+            <column name="xreal" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="positionyreal" type="int">
+            <column name="yreal" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="sfrauenschuh (generated)" id="1626763182512-2">
+        <createSequence cacheSize="1" cycle="false" incrementBy="1" maxValue="9223372036854775807" minValue="1" sequenceName="hibernate_sequence" startValue="2"/>
+    </changeSet>
+    
+    <changeSet author="sfrauenschuh (generated)" id="1626763182512-3">
+    	<insert tableName="postouchpanel">  
+        	<column  name="id"  value="1"/>
+        	<column  name="xest"  value="200"/>
+        	<column  name="yest"  value="150"/>
+        	<column  name="xreal"  value="198"/>
+        	<column  name="yreal"  value="155"/>
+    	</insert>  
+    </changeSet>
+    
+    <changeSet author="sfrauenschuh" id="1626763182512-4">    	
+        <createTable tableName="result">
+            <column  name="id" type="int">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="result_pkey"/>
+            </column>
+            <column name="result" type="int">
                 <constraints nullable="false"/>
             </column>
             <column name="mode" type="int2">
@@ -32,18 +57,11 @@
         </createTable>
     </changeSet>
     
-    <changeSet author="sfrauenschuh (generated)" id="1626763182512-2">
-        <createSequence cacheSize="1" cycle="false" incrementBy="1" maxValue="9223372036854775807" minValue="1" sequenceName="hibernate_sequence" startValue="2"/>
-    </changeSet>
-    
-    <changeSet author="sfrauenschuh (generated)" id="1626763182512-3">
-    	<insert tableName="databasemodel">  
+    <changeSet author="sfrauenschuh (generated)" id="1626763182512-5">
+    	<insert tableName="result">  
         	<column  name="id"  value="1"/>
-        	<column  name="positionxest"  value="200"/>
-        	<column  name="positionyest"  value="150"/>
-        	<column  name="positionxreal"  value="198"/>
-        	<column  name="positionyreal"  value="155"/>
-        	<column  name="mode"  value="0"/>
+        	<column  name="result"  value="100"/>
+        	<column  name="mode"  value="1"/>
         	<column  name="error"  value="0"/>
     	</insert>  
     </changeSet>

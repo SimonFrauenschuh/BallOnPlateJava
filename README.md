@@ -6,7 +6,9 @@
 	Alternative download from "https://gist.github.com/sukharevd/6087988"
 2. Execute "sudo bash wildfly-install.sh"
 3. Check status via "sudo systemctl status wildfly"
-4. Navigate to the new downloaded folder (not the one from GIT) to standalone/configuration and change the standalone.xml to the one, provided in Git
+4. Navigate to the new downloaded folder (not the one from GIT (BallOnPlateJava)) to standalone/configuration and change the standalone.xml to the one, provided in Git
+5. Copy the ssl / https certificate from "BallOnPlateJava" to the wildfly-folder/standalone/configuration
+	1. It could be that the certificate has exceeded it's period of validity, so you might create a new one (or request at "letsencrypt")
 5. Navigate to the bin-folder and execute "sudo bash add-user.sh"
 6. Start the server:
 

@@ -1,0 +1,306 @@
+<!--
+ * Copyright (C) 2021 Simon Frauenschuh - All Rights Reserved
+ * You may use and / or modify this code in
+ * terms of private use.
+ * Any caused damage or misbehaviour of any components are
+ * under the responsibility of the user and and the editor
+ * cannot be prosecuted for it
+ *
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Gamemode</title>
+	
+	<style>
+		body, html {
+			margin: 0;
+			height: 100vh;
+			width: 100vw;
+			background: linear-gradient(#9BB5FA, #9BFAD9);
+			overflow: auto;
+		}
+		
+		.picture_logo {
+			width: 100px;
+			height: 100px;
+			margin-left: 5%;
+			margin-top: 5%;
+		}
+
+		.headlineAccuracy {
+			font-size: 25px;
+			margin: 0;
+			padding: 0;
+		}
+
+		.headlineMode {
+			font-size: 25px;
+			display: flex;
+			justify-content: center;
+			color: rgb(255, 252, 56);
+  			text-shadow: 0 0 15px rgb(255, 252, 56), 0 0 25px rgb(255, 252, 56);
+  			animation: glow 4s linear infinite;
+		}
+		
+		@keyframes glow {
+			0% {
+				filter: hue-rotate(0deg);
+			}
+			100% {
+				filter: hue-rotate(360deg);
+			}
+		}
+		
+		.box_accuracy {
+			position: fixed;
+  			top: 50%;
+  			left: 50%;
+  			transform: translate(-50%, -50%);
+			text-align: center;
+   			height: 70px;
+		    width: 160px;
+		    background: rgba(173, 216, 230, 0.7);
+		    border-radius: 10px;
+		    box-shadow: 5px 5px 10px rgb(70, 70, 70);
+		}
+
+		.box_mode {
+		 	text-align: center;
+   			height: 220px;
+		    width: 160px;
+		    background: rgba(173, 216, 230, 0.7);
+		    border-radius: 10px;
+		    box-shadow: 5px 5px 10px rgb(70, 70, 70);
+		}
+
+		.button {
+	  		padding: 10px 20px;
+	  		text-align: center;
+	  		text-decoration: none;
+	  		display: inline-block;
+	  		font-size: 16px;
+	  		transition-duration: 0.4s;
+	  		cursor: pointer;
+		}
+		
+		.bnt_iOS {
+			background-color: white; 
+			color: black;
+			margin-top: 10%;
+			border: 2px solid #E0C3B6;
+			border-radius: 15px;
+		}
+
+		.bnt_iOS:hover {
+			background-color: #E0C3B6;
+			color: white;
+		}
+		
+		.bnt_return {
+			background-color: white; 
+			color: black;
+			margin-top: 5%;
+			margin-left: 8%;
+			align-items: center;
+			border: 2px solid #000000;
+			border-radius: 10px;
+		}
+		
+		.bnt_return:hover {
+			background-color: #000000;
+			color: white;
+		}
+		
+
+		.btn_balancing {
+			background-color: white; 
+			color: black; 
+			border: 2px solid #A3E089;
+			border-radius: 15px;
+		}
+		
+		.btn_balancing:hover {
+			background-color: #A3E089;
+			color: white;
+		}
+		
+		.btn_labyrinth {
+			background-color: white; 
+			color: black; 
+			margin-top: 10%;
+			border: 2px solid #9FA2E0;
+			border-radius: 15px;
+		}
+		
+		.btn_labyrinth:hover {
+			background-color: #9FA2E0;
+			color: white;
+		}
+		
+		.left { 
+			float: left;
+			width: auto;
+		}
+
+		.right { 
+			float: right;
+			width: auto;
+		}
+		
+		.accResult {
+		font-size: 35px;
+		margin: 0;
+		}
+	</style>
+	
+</head>
+<body>
+	<div class="left">
+		<img class="picture_logo" src="https://raw.githubusercontent.com/SimonFrauenschuh/BallOnPlateJava/67ea06b050bd746e42c756ceeac2fd0bb7741a9f/src/main/resources/Logo_Sisyphos2.png" alt="Logo Sisyphos 2.0">
+		<a href="/Sisyphos">
+			<button class="button bnt_return">Home</button>
+		</a>
+	</div>
+	<div>
+		<div class="box_accuracy">
+			<h3 class="headlineAccuracy">Accuracy:</h3>
+			<h3 class="accResult" id="result"></h3>
+		</div>
+	</div>
+	<div class="right">
+		<div class="box_mode">
+			<h3 class="headlineMode">Mode:</h3>
+			<button class="button btn_balancing" onclick="setMode1();">Balancing</button>
+			<button class="button btn_labyrinth" onclick="setMode2();">Labyrinth</button>
+			<!-- Needed for iOS, only way to access the gyroscope -->
+		<button class="button bnt_iOS" onclick="requestOrientationPermission();">Start iOS</button>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		// Get a new value every second and write it onto the screen
+		setInterval(function(){ 
+			fetch('/Sisyphos/gamemode/GamemodeServlet', {
+			    method: 'GET',
+			    headers: {
+			        'Accept': 'application/json',
+			    },
+			})
+			.then(response => response.text())
+			.then(text => {						
+				var varAcc = Number(text.slice(0, 3));
+				document.getElementById("result").innerHTML = varAcc;
+				
+				var varColor = "rgb(" + (100 - varAcc) + "%, " + varAcc + "%, 0%)";
+				document.getElementById("result").style.color = varColor;
+				}
+			) 
+		}, 1000);										
+
+		// Setting the mode to gamemode and send the gyroscope values of the phone
+		var gyroXOld = 0;
+		var gyroYOld = 0;
+	
+		// Copyright https://itnext.io/gyro-web-accessing-the-device-orientation-in-javascript-387da43eeb84
+		function handleOrientation(event) {
+			
+	  		var gyroX = event.gamma;
+	  		var gyroY = event.beta;
+	  		
+	  		gyroX = parseInt(gyroX, 10);
+	  		gyroY = parseInt(gyroY, 10);
+	  		
+	  		if((gyroX < gyroXOld - 1) || (gyroX > gyroXOld + 1) || (gyroY < gyroYOld - 1) || (gyroY > gyroYOld + 1)) {	// Don't send values that are the same as before
+	  			gyroXOld = gyroX;
+		  		gyroYOld = gyroY;
+	  			if(gyroX > 9){	//X consist of two digits (positive)
+		  			if(gyroY > 9){	//Y consist of two digits (positive)
+		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: +" + gyroY + "}"
+		  			} else if (gyroY >= 0){	//Y consist of one digit (positive)
+		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: +0" + gyroY + "}"
+		  			} else if (gyroY < -9) { //Y consist of two digits (negative)
+		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: " + gyroY + "}"
+		  			} else if (gyroY < 0) { //Y consist of one digit (negative)
+		  				gyroY = gyroY * (-1);
+		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: -0" + gyroY + "}"
+		  			}
+		  		} else if(gyroX < -9) {	//X consist of two digits (negative)
+		  			if(gyroY > 9){
+		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: +" + gyroY + "}"
+		  			} else if (gyroY >= 0){
+		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: +0" + gyroY + "}"
+		  			} else if (gyroY < -9) {
+		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: " + gyroY + "}"
+		  			} else if (gyroY < 0) {
+		  				gyroY = gyroY * (-1);
+		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: -0" + gyroY + "}"
+		  			}
+		  		} else if(gyroX >= 0){	//X consist of one digit (positive)
+		  			if(gyroY > 9){
+		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: +" + gyroY + "}"
+		  			} else if (gyroY >= 0){
+		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: +0" + gyroY + "}"
+		  			} else if (gyroY < -9) {
+		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: " + gyroY + "}"
+		  			} else if (gyroY < 0) {
+		  				gyroY = gyroY * (-1);
+		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: -0" + gyroY + "}"
+		  			}
+		  		} else {	//X consist of one digit (negative)
+	  				gyroX = gyroX * (-1);
+		  			if(gyroY > 9){
+		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: +" + gyroY + "}"
+		  			} else if (gyroY >= 0){
+		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: +0" + gyroY + "}"
+		  			} else if (gyroY < -9) {
+		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: " + gyroY + "}"
+		  			} else if (gyroY < 0) {
+		  				gyroY = gyroY * (-1);
+		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: -0" + gyroY + "}"
+		  			}
+		  		}
+	  		    
+				fetch('/Sisyphos/gamemode/GamemodeServlet', {
+					method: 'POST',
+					headers: {
+						'Accept': 'application/json',
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(stringValue)
+				})
+	  		}
+		}
+		
+		// Access device orientation on non-iOS
+		window.addEventListener('deviceorientation', handleOrientation, true);
+
+    	function requestOrientationPermission(){
+        DeviceOrientationEvent.requestPermission()
+        .catch(console.error)
+    	}
+
+    	function setMode1(){
+    		fetch("/Sisyphos/gamemode/GamemodeServlet", {
+    		  method: "POST",
+    		  headers: {
+    		    'Accept': 'application/json',
+    		    'Content-Type': 'application/json'
+    		  },
+    		  body: JSON.stringify(1)
+    		})
+    	}
+    
+    	function setMode2(){
+    		fetch("/Sisyphos/gamemode/GamemodeServlet", {
+    		  method: "POST",
+    		  headers: {
+    		    'Accept': 'application/json',
+    		    'Content-Type': 'application/json'
+    		  },
+    		  body: JSON.stringify(2)
+    		})
+   		}
+	</script>			
+</body>
+</html>

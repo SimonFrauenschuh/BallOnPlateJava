@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 <modelVersion>4.0.0</modelVersion>
-  <groupId>BallOnPlate</groupId>
+  <groupId>Sisyphos</groupId>
   <artifactId>WebApp</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
-  <name>BallOnPlate : WebApp</name>
+  <name>Sisyphos : WebApp</name>
   <description>Provides a Back- and Frontend to communicate with the project</description>
   
   
@@ -99,10 +99,18 @@
 		    <artifactId>liquibase-slf4j</artifactId>
 		    <version>1.2.1</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>servlet-api</artifactId>
+		    <version>3.0-alpha-1</version>
+		    <scope>provided</scope>
+		</dependency>
   </dependencies>
   
   <build>
-    <finalName>BallOnPlate</finalName>
+    <finalName>Sisyphos</finalName>
     <plugins>
          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
