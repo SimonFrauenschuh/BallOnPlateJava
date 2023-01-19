@@ -8,9 +8,8 @@
  *
  -->
 <!DOCTYPE html>
-<html data-lt-installed="true"><head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252">
-	<meta charset="ISO-8859-1">
+<html>
+<head>
 	<title>Gamemode</title>
 	
 	<style>
@@ -148,6 +147,11 @@
 			float: right;
 			width: auto;
 		}
+		
+		.accResult {
+		font-size: 35px;
+		margin: 0;
+		}
 	</style>
 	
 </head>
@@ -161,7 +165,7 @@
 	<div>
 		<div class="box_accuracy">
 			<h3 class="headlineAccuracy">Accuracy:</h3>
-			<h3 id="result" style="font-size: 35px; margin: 0;"></h3>
+			<h3 class="accResult" id="result"></h3>
 		</div>
 	</div>
 	<div class="right">
@@ -185,7 +189,11 @@
 			})
 			.then(response => response.text())
 			.then(text => {						
-				document.getElementById("result").innerHTML = text.slice(0, 3);
+				var varAcc = Number(text.slice(0, 3));
+				document.getElementById("result").innerHTML = varAcc;
+				
+				var varColor = "rgb(" + (100 - varAcc) + "%, " + varAcc + "%, 0%)";
+				document.getElementById("result").style.color = varColor;
 				}
 			) 
 		}, 1000);										
