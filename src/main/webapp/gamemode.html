@@ -187,77 +187,81 @@
 			        'Accept': 'application/json',
 			    },
 			})
-			.then(response => response.text())
-			.then(text => {						
-				var varAcc = Number(text.slice(0, 3));
-				document.getElementById("result").innerHTML = varAcc;
-				
-				var varColor = "rgb(" + (100 - varAcc) + "%, " + varAcc + "%, 0%)";
-				document.getElementById("result").style.color = varColor;
-				}
+			.then(response => response.json())
+			.then(text => {
+				document.getElementById("result").innerHTML = text.result;
+
+				let mode = text.mode;
+				if (mode == 1) {
+					let result = text.result;
+					let varColor = "rgb(" + (100 - result) + "%, " + result + "%, 0%)";
+					document.getElementById("result").style.color = varColor;
+				}	
+			}
 			) 
 		}, 1000);										
 
 		// Setting the mode to gamemode and send the gyroscope values of the phone
-		var gyroXOld = 0;
-		var gyroYOld = 0;
+		let gyroXOld = 0;
+		let gyroYOld = 0;
 	
 		// Copyright https://itnext.io/gyro-web-accessing-the-device-orientation-in-javascript-387da43eeb84
 		function handleOrientation(event) {
 			
-	  		var gyroX = event.gamma;
-	  		var gyroY = event.beta;
+	  		let gyroX = event.gamma;
+	  		let gyroY = event.beta;
 	  		
 	  		gyroX = parseInt(gyroX, 10);
 	  		gyroY = parseInt(gyroY, 10);
 	  		
 	  		if((gyroX < gyroXOld - 1) || (gyroX > gyroXOld + 1) || (gyroY < gyroYOld - 1) || (gyroY > gyroYOld + 1)) {	// Don't send values that are the same as before
+			  	let stringValue
 	  			gyroXOld = gyroX;
 		  		gyroYOld = gyroY;
 	  			if(gyroX > 9){	//X consist of two digits (positive)
 		  			if(gyroY > 9){	//Y consist of two digits (positive)
-		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: +" + gyroY + "}"
+		  				stringValue = "{posXEst: +" + gyroX + ", posYEst: +" + gyroY + "}"
 		  			} else if (gyroY >= 0){	//Y consist of one digit (positive)
-		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: +0" + gyroY + "}"
+		  				stringValue = "{posXEst: +" + gyroX + ", posYEst: +0" + gyroY + "}"
 		  			} else if (gyroY < -9) { //Y consist of two digits (negative)
-		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: " + gyroY + "}"
+		  				stringValue = "{posXEst: +" + gyroX + ", posYEst: " + gyroY + "}"
 		  			} else if (gyroY < 0) { //Y consist of one digit (negative)
 		  				gyroY = gyroY * (-1);
-		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: -0" + gyroY + "}"
+		  				stringValue = "{posXEst: +" + gyroX + ", posYEst: -0" + gyroY + "}"
 		  			}
 		  		} else if(gyroX < -9) {	//X consist of two digits (negative)
 		  			if(gyroY > 9){
-		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: +" + gyroY + "}"
+		  				stringValue = "{posXEst: " + gyroX + ", posYEst: +" + gyroY + "}"
 		  			} else if (gyroY >= 0){
-		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: +0" + gyroY + "}"
+		  				stringValue = "{posXEst: " + gyroX + ", posYEst: +0" + gyroY + "}"
 		  			} else if (gyroY < -9) {
-		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: " + gyroY + "}"
+		  				stringValue = "{posXEst: " + gyroX + ", posYEst: " + gyroY + "}"
 		  			} else if (gyroY < 0) {
 		  				gyroY = gyroY * (-1);
-		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: -0" + gyroY + "}"
+		  				stringValue = "{posXEst: " + gyroX + ", posYEst: -0" + gyroY + "}"
 		  			}
 		  		} else if(gyroX >= 0){	//X consist of one digit (positive)
 		  			if(gyroY > 9){
-		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: +" + gyroY + "}"
+		  				stringValue = "{posXEst: +0" + gyroX + ", posYEst: +" + gyroY + "}"
 		  			} else if (gyroY >= 0){
-		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: +0" + gyroY + "}"
+		  				stringValue = "{posXEst: +0" + gyroX + ", posYEst: +0" + gyroY + "}"
 		  			} else if (gyroY < -9) {
-		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: " + gyroY + "}"
+		  				stringValue = "{posXEst: +0" + gyroX + ", posYEst: " + gyroY + "}"
 		  			} else if (gyroY < 0) {
 		  				gyroY = gyroY * (-1);
-		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: -0" + gyroY + "}"
+		  				stringValue = "{posXEst: +0" + gyroX + ", posYEst: -0" + gyroY + "}"
 		  			}
 		  		} else {	//X consist of one digit (negative)
 	  				gyroX = gyroX * (-1);
 		  			if(gyroY > 9){
-		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: +" + gyroY + "}"
+		  				stringValue = "{posXEst: -0" + gyroX + ", posYEst: +" + gyroY + "}"
 		  			} else if (gyroY >= 0){
-		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: +0" + gyroY + "}"
+		  				stringValue = "{posXEst: -0" + gyroX + ", posYEst: +0" + gyroY + "}"
 		  			} else if (gyroY < -9) {
-		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: " + gyroY + "}"
+		  				stringValue = "{posXEst: -0" + gyroX + ", posYEst: " + gyroY + "}"
 		  			} else if (gyroY < 0) {
 		  				gyroY = gyroY * (-1);
-		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: -0" + gyroY + "}"
+		  				stringValue = "{posXEst: -0" + gyroX + ", posYEst: -0" + gyroY + "}"
 		  			}
 		  		}
 	  		    
