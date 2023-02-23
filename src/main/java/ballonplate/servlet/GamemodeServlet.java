@@ -63,7 +63,11 @@ public class GamemodeServlet extends HttpServlet {
 		} else if (mode == 2) {
 			// For the starting sequence
 			int result = databaseResultRepository.getResult();
-			jsonSend += "\"result\":\"" + Integer.toString(result) + "\"}";
+			if (result == 0) {
+				jsonSend += "\"result\":\"Start!\"}";
+			} else {
+				jsonSend += "\"result\":\"" + Integer.toString(result) + "\"}";
+			}
 			response.getWriter().append(jsonSend);
 		}
 	}
