@@ -54,11 +54,16 @@ public class GamemodeServlet extends HttpServlet {
 		if(mode == 1) {
 			jsonSend += "\"result\":" + Integer.toString(databaseResultRepository.getResult()) + "}";
 			response.getWriter().append(jsonSend);
-		} else if (mode == 2) {
+		} else if (mode == 3) {
 			int result = databaseResultRepository.getResult();
 			jsonSend += "\"result\":\"" + Integer.toString((result / 100) % 10) + Integer.toString((result / 10) % 10) + "," + Integer.toString(result % 10) + "s\"}";
 			// Convert the result to the format: SS,Ms
 			// e.g. like 12,3s
+			response.getWriter().append(jsonSend);
+		} else if (mode == 2) {
+			// For the starting sequence
+			int result = databaseResultRepository.getResult();
+			jsonSend += "\"result\":\"" + Integer.toString(result) + "\"}";
 			response.getWriter().append(jsonSend);
 		}
 	}
