@@ -131,19 +131,24 @@
 									    },
 									})
 									.then(response => response.text())
-									.then(text => {						
-												var posX = text.slice(0, 3);
-									    		var posY = text.slice(3);
-									    		
-									    		var c = document.getElementById("visualization");
-												var ctx = c.getContext("2d");
-												ctx.fillStyle = "black";
-												ctx.beginPath();
-												ctx.arc(posX,posY,15,0,2*Math.PI);
-												ctx.fill();
-											}
+									.then(text => {
+										var data = JSON.parse(text);			
+										var posX = data.posX;
+										var posY = data.posX;
+							    		
+							    		var c = document.getElementById("visualization");
+										var ctx = c.getContext("2d");
+										// Make the canvas white again
+										ctx.fillStyle = "white";
+										ctx.fillRect(0, 0, c.width, c.height);
+										// Draw the ball
+										ctx.fillStyle = "black";
+										ctx.beginPath();
+										ctx.arc(posX,posY,15,0,2*Math.PI);
+										ctx.fill();
+									}
 									) 
-								}, 200);				
+								}, 100);				
 							</script>
 						</canvas>
 					</a>
