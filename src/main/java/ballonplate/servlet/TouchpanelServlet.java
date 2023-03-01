@@ -40,7 +40,8 @@ public class TouchpanelServlet extends HttpServlet {
     
     // Read the values from the db and pass them in the format xxxyyy
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("{\"posX\":" + Integer.toString(databaseTouchpanelRepository.getPosXReal()) + ",\"posY\":" + Integer.toString(databaseTouchpanelRepository.getPosYReal()) + "}");
+		response.getWriter().append("{\"posX\":" + Integer.toString(databaseTouchpanelRepository.getPosXReal()) +
+				",\"posY\":" + Integer.toString(databaseTouchpanelRepository.getPosYReal()) + "}");
 	}
 	
 	// Extract the data from the POST-Request and store it into the db
