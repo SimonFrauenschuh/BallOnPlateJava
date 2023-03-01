@@ -1,5 +1,5 @@
-# BallOnPlateJava
-**Contains the Code / Workflow for the frontend and the Web Application of the BallOnPlate Project. Written in Java EE**
+# SisyphosJava
+**Contains the Code / Workflow for the frontend and the Web Application of the Sisyphos 2.0 Project. Written in Java EE**
 
 ## Install Wildfly as standalone
 1. Navigate to the BallOnPlateJava", where "wildfly-install.sh" is located
@@ -45,13 +45,13 @@
 9. Connect to the database via "\connect ballonplateds;" to check, if all worked well
 
 ## "Start" the application
-1. Go to "BallOnPlateJava/target" and copy the file "BallOnPlate.war", that is provided in GIT
+1. Go to "BallOnPlateJava/target" and copy the file "Sisyphos.war", that is provided in GIT
 2. Go to "wildfly-22.0.1.Final/standalone/deployments" and paste the file
 3. There should be something going on in the cmd-line, where you started the server
-	"WFLYSRV0010: Deployed "BallOnPlate.war" (runtime-name : "BallOnPlate.war")" is good, errors are bad
-4. Go to the web-console - "Deployments". There you should see "BallOnPlate.war".
-5. To open the application: click on "BallOnPlate.war" and use the the link provided (Context root)
+	"WFLYSRV0010: Deployed "Sisyphos.war" (runtime-name : "Sisyphos.war")" is good, errors are bad
+4. Go to the web-console - "Deployments". There you should see "Sisyphos.war".
+5. To open the application: click on "Sisyphos.war" and use the the link provided (Context root)
 
 
 ### Note!
-**This is a RESTful application, which means, that it does nothing, until you open it. Your connection will be closed, after you close the tab, but the data will be safe (Stateless Programming style). So you're device-independent, but you can cause unexpected behaviour if more than one client is connected!!**
+**This is a RESTful application, which means, that it does nothing, until you open it. Your connection will be closed, after you close the tab, but the data will be safe (Stateless Programming style). So you're device-independent, but you can cause unexpected behaviour if more than one client is sending values!!**
