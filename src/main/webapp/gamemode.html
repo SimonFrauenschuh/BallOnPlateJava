@@ -75,13 +75,14 @@
 		}
 
 		.button {
-	  		padding: 10px 20px;
 	  		text-align: center;
 	  		text-decoration: none;
 	  		display: inline-block;
 	  		font-size: 16px;
 	  		transition-duration: 0.4s;
 	  		cursor: pointer;
+	  		width: 70%;
+			height: 18%;
 		}
 		
 		.bnt_iOS {
@@ -98,6 +99,14 @@
 		}
 		
 		.bnt_return {
+			text-align: center;
+	  		text-decoration: none;
+	  		display: inline-block;
+	  		font-size: 16px;
+	  		transition-duration: 0.4s;
+	  		cursor: pointer;
+		
+			padding: 10px 20px;
 			background-color: white; 
 			color: black;
 			margin-top: 5%;
@@ -124,8 +133,13 @@
 			background-color: #A3E089;
 			color: white;
 		}
+
+		.btn_balancing:focus{
+  			cursor: pointer;
+  			background-color: #A3E089;
+		}
 		
-		.btn_labyrinth {
+		.btn_race {
 			background-color: white; 
 			color: black; 
 			margin-top: 10%;
@@ -133,9 +147,14 @@
 			border-radius: 15px;
 		}
 		
-		.btn_labyrinth:hover {
+		.btn_race:hover {
 			background-color: #9FA2E0;
 			color: white;
+		}
+		
+		.btn_race:focus{
+  			cursor: pointer;
+  			background-color: #9FA2E0;
 		}
 		
 		.left { 
@@ -159,7 +178,7 @@
 	<div class="left">
 		<img class="picture_logo" src="https://raw.githubusercontent.com/SimonFrauenschuh/BallOnPlateJava/67ea06b050bd746e42c756ceeac2fd0bb7741a9f/src/main/resources/Logo_Sisyphos2.png" alt="Logo Sisyphos 2.0">
 		<a href="/Sisyphos">
-			<button class="button bnt_return">Home</button>
+			<button class="bnt_return">Home</button>
 		</a>
 	</div>
 	<div>
@@ -172,7 +191,7 @@
 		<div class="box_mode">
 			<h3 class="headlineMode">Mode:</h3>
 			<button class="button btn_balancing" onclick="setMode1();">Balancing</button>
-			<button class="button btn_labyrinth" onclick="setMode2();">Start Race</button>
+			<button class="button btn_race" onclick="setMode2();">Start Race</button>
 			<!-- Needed for iOS, only way to access the gyroscope -->
 		<button class="button bnt_iOS" onclick="requestOrientationPermission();">Start iOS</button>
 		</div>
