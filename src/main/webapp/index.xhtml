@@ -60,37 +60,6 @@
 	          </div>
         </h:form>
         
-        <!-- Get the values for the table -->
-        <script type="text/javascript">
-			setInterval(function(){ 
-				fetch('/Sisyphos/rest/entrys/last', {
-					method: 'GET',
-					headers: {
-						'Accept': 'application/json',
-					},
-				})
-				.then(response => response.text())
-				.then(text => {		
-					var data = JSON.parse(text);
-					
-					var id = data.id;
-					var positionXReal = data.xreal;
-					var positionYReal = data.yreal;
-					var positionXEst = data.xest;
-					var positionYEst = data.yest;
-					
-					document.getElementById('rId').innerHTML = id;
-					document.getElementById('rPosXest').innerHTML = positionXEst;
-					document.getElementById('rPosYest').innerHTML = positionYEst;
-					document.getElementById('rPosXre').innerHTML = positionXReal;
-					document.getElementById('rPosYre').innerHTML = positionYReal;
-
-					}
-				)
-			 
-			}, 500);
-		</script>
-        
         <div class="box_webView">
 	        <h2>Web View</h2>
 
@@ -124,7 +93,7 @@
 				    		<script type="text/javascript">
 				    			// Get the values for the visualization
 					    		setInterval(function(){ 
-									fetch('/Sisyphos/TouchpanelServlet', {
+									fetch('/Sisyphos/rest/entrys/last', {
 									    method: 'GET',
 									    headers: {
 									        'Accept': 'application/json',
@@ -132,10 +101,22 @@
 									})
 									.then(response => response.text())
 									.then(text => {
-										var data = JSON.parse(text);			
-										var posX = data.posX;
-										var posY = data.posY;
+										var data = JSON.parse(text);
+										
+										var id = data.id;
+										var positionXReal = data.xreal;
+										var positionYReal = data.yreal;
+										var positionXEst = data.xest;
+										var positionYEst = data.yest;
+										
+										// Set the values for the table on the left side
+										document.getElementById('rId').innerHTML = id;
+										document.getElementById('rPosXest').innerHTML = positionXEst;
+										document.getElementById('rPosYest').innerHTML = positionYEst;
+										document.getElementById('rPosXre').innerHTML = positionXReal;
+										document.getElementById('rPosYre').innerHTML = positionYReal;
 							    		
+										// Canvas configuration
 							    		var c = document.getElementById("visualization");
 										var ctx = c.getContext("2d");
 										// Make the canvas white again
@@ -144,7 +125,7 @@
 										// Draw the ball
 										ctx.fillStyle = "black";
 										ctx.beginPath();
-										ctx.arc(posX,posY,15,0,2*Math.PI);
+										ctx.arc(positionXReal,positionYReal,15,0,2*Math.PI);
 										ctx.fill();
 									}
 									) 

@@ -10,7 +10,7 @@
     <servlet-name>GamemodeServlet</servlet-name>
     <url-pattern>/gamemode/GamemodeServlet</url-pattern>
   </servlet-mapping>
-  <display-name>WebApp</display-name>
+  <display-name>Sisyphos 2.0</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -19,14 +19,4 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <description></description>
-    <display-name>TouchpanelServlet</display-name>
-    <servlet-name>TouchpanelServlet</servlet-name>
-    <servlet-class>ballonplate.servlet.TouchpanelServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TouchpanelServlet</servlet-name>
-    <url-pattern>/TouchpanelServlet</url-pattern>
-  </servlet-mapping>
 </web-app>
