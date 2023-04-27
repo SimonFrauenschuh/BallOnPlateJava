@@ -31,7 +31,10 @@
         	<div class="box_webControl">
 	        	<h2>Web Control</h2>
 	            <div>
-	            	<p>Maybe some extremely helpful information in the future</p>
+	            	<h4 id="webC_Subheadline">Set x- and y-position for the ball</h4>
+	            	<p id="webC_Note_headline">Note:</p>
+	            	<p id="webC_Note"> x-value can only be between 0 and 365</p>
+	            	<p id="webC_Note"> y-value can only be between 0 and 235</p>
 	            </div>
 	        	<h:panelGrid columns="3" columnClasses="titleCell">
 	                <h:outputLabel for="xPosition" value="xPosition: " />
@@ -56,37 +59,6 @@
 	            </p>
 	          </div>
         </h:form>
-        
-        <!-- Get the values for the table -->
-        <script type="text/javascript">
-			setInterval(function(){ 
-				fetch('/Sisyphos/rest/entrys/last', {
-					method: 'GET',
-					headers: {
-						'Accept': 'application/json',
-					},
-				})
-				.then(response => response.text())
-				.then(text => {		
-					var data = JSON.parse(text);
-					
-					var id = data.id;
-					var positionXReal = data.xreal;
-					var positionYReal = data.yreal;
-					var positionXEst = data.xest;
-					var positionYEst = data.yest;
-					
-					document.getElementById('rId').innerHTML = id;
-					document.getElementById('rPosXest').innerHTML = positionXEst;
-					document.getElementById('rPosYest').innerHTML = positionYEst;
-					document.getElementById('rPosXre').innerHTML = positionXReal;
-					document.getElementById('rPosYre').innerHTML = positionYReal;
-
-					}
-				)
-			 
-			}, 500);
-		</script>
         
         <div class="box_webView">
 	        <h2>Web View</h2>
@@ -117,39 +89,51 @@
 	        <div class="box_visualization">
 	    		<h2>Gamemode</h2>		
 			    	<a href="/Sisyphos/gamemode.html">
-			    		<canvas id="visualization" style="border:2px solid #000000; background-color: white;" width="365" height="235">
+			    		<canvas id="visualization" style="border:2px solid #000000; background-color: white;" width="310" height="235">
 				    		<script type="text/javascript">
 				    			// Get the values for the visualization
 					    		setInterval(function(){ 
-									fetch('/Sisyphos/TouchpanelServlet', {
+									fetch('/Sisyphos/rest/entrys/last', {
 									    method: 'GET',
 									    headers: {
 									        'Accept': 'application/json',
 									    },
 									})
 									.then(response => response.text())
-									.then(text => {						
-												var posX = text.slice(0, 3);
-									    		var posY = text.slice(3);
-									    		
-									    		var c = document.getElementById("visualization");
-												var ctx = c.getContext("2d");
-												ctx.fillStyle = "black";
-												ctx.beginPath();
-												ctx.arc(posX,posY,15,0,2*Math.PI);
-												ctx.fill();
-											}
+									.then(text => {
+										var data = JSON.parse(text);
+										
+										var id = data.id;
+										var positionXReal = data.xreal;
+										var positionYReal = data.yreal;
+										var positionXEst = data.xest;
+										var positionYEst = data.yest;
+										
+										// Set the values for the table on the left side
+										document.getElementById('rId').innerHTML = id;
+										document.getElementById('rPosXest').innerHTML = positionXEst;
+										document.getElementById('rPosYest').innerHTML = positionYEst;
+										document.getElementById('rPosXre').innerHTML = positionXReal;
+										document.getElementById('rPosYre').innerHTML = positionYReal;
+							    		
+										// Canvas configuration
+							    		var c = document.getElementById("visualization");
+										var ctx = c.getContext("2d");
+										// Make the canvas white again
+										ctx.fillStyle = "white";
+										ctx.fillRect(0, 0, c.width, c.height);
+										// Draw the ball
+										ctx.fillStyle = "black";
+										ctx.beginPath();
+										ctx.arc(positionXReal,positionYReal,15,0,2*Math.PI);
+										ctx.fill();
+									}
 									) 
-								}, 200);				
+								}, 100);				
 							</script>
 						</canvas>
 					</a>
 			</div>
-		<h4>Wir freuen uns über jede Unterstützung</h4>
-		<form action="https://www.paypal.com/donate" method="post" target="_top">
-			<input type="hidden" name="hosted_button_id" value="RKCJMAWVDXHRS" />
-			<input type="image" src="https://www.paypalobjects.com/de_DE/AT/i/btn/btn_donateCC_LG.gif" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Spenden mit dem PayPal-Button" />
-		</form>
 		</div>
     </ui:define>
 </ui:composition>

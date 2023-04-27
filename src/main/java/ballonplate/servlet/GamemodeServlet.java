@@ -50,13 +50,25 @@ public class GamemodeServlet extends HttpServlet {
     // Read the values from the db and pass them in the format xxx
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int mode = databaseResultRepository.getMode();
+		String jsonSend = "{\"mode\":" + mode + ",";
 		if(mode == 1) {
-			response.getWriter().append(Integer.toString(databaseResultRepository.getResult()));
-		} else if (mode == 2) {
+			jsonSend += "\"result\":" + Integer.toString(databaseResultRepository.getResult()) + "}";
+			response.getWriter().append(jsonSend);
+		} else if (mode == 3) {
 			int result = databaseResultRepository.getResult();
+			jsonSend += "\"result\":\"" + Integer.toString((result / 100) % 10) + Integer.toString((result / 10) % 10) + "," + Integer.toString(result % 10) + "s\"}";
 			// Convert the result to the format: SS,Ms
 			// e.g. like 12,3s
-			response.getWriter().append(Integer.toString((result / 100) % 10) + Integer.toString((result / 10) % 10) + "," + Integer.toString(result % 10) + "s");
+			response.getWriter().append(jsonSend);
+		} else if (mode == 2) {
+			// For the starting sequence
+			int result = databaseResultRepository.getResult();
+			if (result == 0) {
+				jsonSend += "\"result\":\"Start!\"}";
+			} else {
+				jsonSend += "\"result\":\"" + Integer.toString(result) + "\"}";
+			}
+			response.getWriter().append(jsonSend);
 		}
 	}
 	

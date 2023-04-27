@@ -75,13 +75,14 @@
 		}
 
 		.button {
-	  		padding: 10px 20px;
 	  		text-align: center;
 	  		text-decoration: none;
 	  		display: inline-block;
 	  		font-size: 16px;
 	  		transition-duration: 0.4s;
 	  		cursor: pointer;
+	  		width: 70%;
+			height: 18%;
 		}
 		
 		.bnt_iOS {
@@ -98,6 +99,14 @@
 		}
 		
 		.bnt_return {
+			text-align: center;
+	  		text-decoration: none;
+	  		display: inline-block;
+	  		font-size: 16px;
+	  		transition-duration: 0.4s;
+	  		cursor: pointer;
+		
+			padding: 10px 20px;
 			background-color: white; 
 			color: black;
 			margin-top: 5%;
@@ -124,8 +133,13 @@
 			background-color: #A3E089;
 			color: white;
 		}
+
+		.btn_balancing:focus{
+  			cursor: pointer;
+  			background-color: #A3E089;
+		}
 		
-		.btn_labyrinth {
+		.btn_race {
 			background-color: white; 
 			color: black; 
 			margin-top: 10%;
@@ -133,9 +147,14 @@
 			border-radius: 15px;
 		}
 		
-		.btn_labyrinth:hover {
+		.btn_race:hover {
 			background-color: #9FA2E0;
 			color: white;
+		}
+		
+		.btn_race:focus{
+  			cursor: pointer;
+  			background-color: #9FA2E0;
 		}
 		
 		.left { 
@@ -159,12 +178,12 @@
 	<div class="left">
 		<img class="picture_logo" src="https://raw.githubusercontent.com/SimonFrauenschuh/BallOnPlateJava/67ea06b050bd746e42c756ceeac2fd0bb7741a9f/src/main/resources/Logo_Sisyphos2.png" alt="Logo Sisyphos 2.0">
 		<a href="/Sisyphos">
-			<button class="button bnt_return">Home</button>
+			<button class="bnt_return">Home</button>
 		</a>
 	</div>
 	<div>
 		<div class="box_accuracy">
-			<h3 class="headlineAccuracy">Accuracy:</h3>
+			<h3 class="headlineAccuracy">Result:</h3>
 			<h3 class="accResult" id="result"></h3>
 		</div>
 	</div>
@@ -172,7 +191,7 @@
 		<div class="box_mode">
 			<h3 class="headlineMode">Mode:</h3>
 			<button class="button btn_balancing" onclick="setMode1();">Balancing</button>
-			<button class="button btn_labyrinth" onclick="setMode2();">Labyrinth</button>
+			<button class="button btn_race" onclick="setMode2();">Start Race</button>
 			<!-- Needed for iOS, only way to access the gyroscope -->
 		<button class="button bnt_iOS" onclick="requestOrientationPermission();">Start iOS</button>
 		</div>
@@ -187,77 +206,81 @@
 			        'Accept': 'application/json',
 			    },
 			})
-			.then(response => response.text())
-			.then(text => {						
-				var varAcc = Number(text.slice(0, 3));
-				document.getElementById("result").innerHTML = varAcc;
-				
-				var varColor = "rgb(" + (100 - varAcc) + "%, " + varAcc + "%, 0%)";
-				document.getElementById("result").style.color = varColor;
-				}
+			.then(response => response.json())
+			.then(text => {
+				document.getElementById("result").innerHTML = text.result;
+
+				let mode = text.mode;
+				if (mode == 1) {
+					let result = text.result;
+					let varColor = "rgb(" + (100 - result) + "%, " + result + "%, 0%)";
+					document.getElementById("result").style.color = varColor;
+				}	
+			}
 			) 
 		}, 1000);										
 
 		// Setting the mode to gamemode and send the gyroscope values of the phone
-		var gyroXOld = 0;
-		var gyroYOld = 0;
+		let gyroXOld = 0;
+		let gyroYOld = 0;
 	
 		// Copyright https://itnext.io/gyro-web-accessing-the-device-orientation-in-javascript-387da43eeb84
 		function handleOrientation(event) {
 			
-	  		var gyroX = event.gamma;
-	  		var gyroY = event.beta;
+	  		let gyroX = event.gamma;
+	  		let gyroY = event.beta;
 	  		
 	  		gyroX = parseInt(gyroX, 10);
 	  		gyroY = parseInt(gyroY, 10);
 	  		
 	  		if((gyroX < gyroXOld - 1) || (gyroX > gyroXOld + 1) || (gyroY < gyroYOld - 1) || (gyroY > gyroYOld + 1)) {	// Don't send values that are the same as before
+			  	let stringValue
 	  			gyroXOld = gyroX;
 		  		gyroYOld = gyroY;
 	  			if(gyroX > 9){	//X consist of two digits (positive)
 		  			if(gyroY > 9){	//Y consist of two digits (positive)
-		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: +" + gyroY + "}"
+		  				stringValue = "{posXEst: +" + gyroX + ", posYEst: +" + gyroY + "}"
 		  			} else if (gyroY >= 0){	//Y consist of one digit (positive)
-		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: +0" + gyroY + "}"
+		  				stringValue = "{posXEst: +" + gyroX + ", posYEst: +0" + gyroY + "}"
 		  			} else if (gyroY < -9) { //Y consist of two digits (negative)
-		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: " + gyroY + "}"
+		  				stringValue = "{posXEst: +" + gyroX + ", posYEst: " + gyroY + "}"
 		  			} else if (gyroY < 0) { //Y consist of one digit (negative)
 		  				gyroY = gyroY * (-1);
-		  				var stringValue = "{posXEst: +" + gyroX + ", posYEst: -0" + gyroY + "}"
+		  				stringValue = "{posXEst: +" + gyroX + ", posYEst: -0" + gyroY + "}"
 		  			}
 		  		} else if(gyroX < -9) {	//X consist of two digits (negative)
 		  			if(gyroY > 9){
-		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: +" + gyroY + "}"
+		  				stringValue = "{posXEst: " + gyroX + ", posYEst: +" + gyroY + "}"
 		  			} else if (gyroY >= 0){
-		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: +0" + gyroY + "}"
+		  				stringValue = "{posXEst: " + gyroX + ", posYEst: +0" + gyroY + "}"
 		  			} else if (gyroY < -9) {
-		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: " + gyroY + "}"
+		  				stringValue = "{posXEst: " + gyroX + ", posYEst: " + gyroY + "}"
 		  			} else if (gyroY < 0) {
 		  				gyroY = gyroY * (-1);
-		  				var stringValue = "{posXEst: " + gyroX + ", posYEst: -0" + gyroY + "}"
+		  				stringValue = "{posXEst: " + gyroX + ", posYEst: -0" + gyroY + "}"
 		  			}
 		  		} else if(gyroX >= 0){	//X consist of one digit (positive)
 		  			if(gyroY > 9){
-		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: +" + gyroY + "}"
+		  				stringValue = "{posXEst: +0" + gyroX + ", posYEst: +" + gyroY + "}"
 		  			} else if (gyroY >= 0){
-		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: +0" + gyroY + "}"
+		  				stringValue = "{posXEst: +0" + gyroX + ", posYEst: +0" + gyroY + "}"
 		  			} else if (gyroY < -9) {
-		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: " + gyroY + "}"
+		  				stringValue = "{posXEst: +0" + gyroX + ", posYEst: " + gyroY + "}"
 		  			} else if (gyroY < 0) {
 		  				gyroY = gyroY * (-1);
-		  				var stringValue = "{posXEst: +0" + gyroX + ", posYEst: -0" + gyroY + "}"
+		  				stringValue = "{posXEst: +0" + gyroX + ", posYEst: -0" + gyroY + "}"
 		  			}
 		  		} else {	//X consist of one digit (negative)
 	  				gyroX = gyroX * (-1);
 		  			if(gyroY > 9){
-		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: +" + gyroY + "}"
+		  				stringValue = "{posXEst: -0" + gyroX + ", posYEst: +" + gyroY + "}"
 		  			} else if (gyroY >= 0){
-		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: +0" + gyroY + "}"
+		  				stringValue = "{posXEst: -0" + gyroX + ", posYEst: +0" + gyroY + "}"
 		  			} else if (gyroY < -9) {
-		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: " + gyroY + "}"
+		  				stringValue = "{posXEst: -0" + gyroX + ", posYEst: " + gyroY + "}"
 		  			} else if (gyroY < 0) {
 		  				gyroY = gyroY * (-1);
-		  				var stringValue = "{posXEst: -0" + gyroX + ", posYEst: -0" + gyroY + "}"
+		  				stringValue = "{posXEst: -0" + gyroX + ", posYEst: -0" + gyroY + "}"
 		  			}
 		  		}
 	  		    
