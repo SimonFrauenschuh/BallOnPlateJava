@@ -3,7 +3,7 @@
 <modelVersion>4.0.0</modelVersion>
   <groupId>Sisyphos</groupId>
   <artifactId>WebApp</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2-SNAPSHOT</version>
   <packaging>war</packaging>
   <name>Sisyphos : WebApp</name>
   <description>Provides a Back- and Frontend to communicate with the project</description>
