@@ -1,0 +1,19 @@
+#Mon Nov 20 15:50:10 UTC 2023
+micronaut:
+  application:
+    name:sisyphos
+datasources:
+  default:
+    dialect: MYSQL
+    driverClassName: com.mysql.cj.jdbc.Driver
+
+liquibase:
+  enabled: true
+  datasources:
+    default:
+      change-log: 'classpath:db/liquibase-changelog.xml'
+
+endpoints:
+  liquibase:
+    enabled: true
+    sensitive: false
