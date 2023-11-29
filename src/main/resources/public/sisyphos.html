@@ -1,0 +1,292 @@
+<!--
+ * Copyright (C) 2021 Simon Frauenschuh - All Rights Reserved
+ * You may use and / or modify this code in
+ * terms of private use.
+ * Any caused damage or misbehaviour of any components are
+ * under the responsibility of the user and and the editor
+ * cannot be prosecuted for it
+ *
+ -->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" lang="en">
+<h:head>
+    <title>Sisyphos</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <h:outputStylesheet name="css/screen.css" />
+
+    <style type="text/css">
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            background: linear-gradient(#9BB5FA, #9BFAD9);
+            overflow: auto;
+        }
+
+        .h1_title {
+            text-align: center;
+            float: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid black;
+        }
+
+        .picture_logo {
+            width: 100px;
+            height: 100px;
+            float: right;
+            margin-right: 0%;
+        }
+
+        .box_webControl {
+             text-align: center;
+               height: auto;
+            width: 400px;
+            background: rgba(173, 216, 230, 0.7);
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px rgb(70, 70, 70);
+        }
+
+        #webC_Subheadline {
+            text-align: left;
+        }
+
+        #webC_Note_headline {
+            text-align: left;
+            line-height: 0;
+        }
+
+        #webC_Note {
+            text-align: left;
+            font-size: 15px;
+            line-height: 0;
+            margin-left: 14px;
+        }
+
+        .box_webView {
+             text-align: center;
+               height: 154px;
+            width: 400px;
+            background: rgba(173, 216, 230, 0.7);
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px rgb(70, 70, 70);
+        }
+
+        .box_visualization {
+             text-align: center;
+               height: 310px;
+            width: 400px;
+            background: rgba(173, 216, 230, 0.7);
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px rgb(70, 70, 70);
+        }
+
+        .button {
+              background-color: #008CBA; /* blue */
+              border: none;
+             color: white;
+              padding: 12px 24px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 16px;
+              margin: 4px 2px;
+              transition-duration: 0.4s;
+              cursor: pointer;
+        }
+
+        .button_register {
+            background-color: white;
+            color: black;
+            border: 2px solid #008CBA;
+            border-radius: 10px;
+            margin: auto;
+            margin-top: 10px
+        }
+
+        .button_register:hover {
+            background-color: #008CBA;
+            color: white;
+        }
+
+        .left {
+            float: left;
+            width: auto;
+        }
+
+        .right {
+            float: right;
+            width: auto;
+        }
+
+        .box_webView datatable {
+          border-collapse: collapse;
+          width: auto;
+        }
+
+        .box_webView td, .box_webView th {
+          border: 1px solid #ddd;
+          padding: 8px;
+          border-collapse: collapse;
+        }
+
+        .box_webView tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .box_webView tr:hover {
+            background-color: #ddd;
+        }
+
+        .box_webView th {
+        border-collapse: collapse;
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: left;
+          background-color: #04AA6D;
+          color: white;
+        }
+
+    </style>
+
+</h:head>
+
+<script type="text/javascript">
+    // If the page is loaded, ensure that AutoBalancing mode is activated
+    fetch('../', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"setAutoBalancingMode":true})
+    })
+</script>
+
+<h:body>
+    <div id="container">
+        <div id="content">
+            <img class="picture_logo" src="https://raw.githubusercontent.com/SimonFrauenschuh/BallOnPlateJava/67ea06b050bd746e42c756ceeac2fd0bb7741a9f/src/main/resources/Logo_Sisyphos2.png" alt="Logo Sisyphos 2.0">
+            </img>
+            <div class="h1_title">
+                <h1>Sisyphos 2.0</h1>
+                <p>Diploma Work of Simon Frauenschuh and Sebastian Haider</p>
+            </div>
+
+            <div class="left">
+                <div class="box_webControl">
+                    <h2 class="box_webControl">WebControl</h2>
+
+                    <label for="yPosition" class="right">
+                        <br>
+                    </label>
+                    <input type="text" placeholder="PositionY [0...235]" class="right" name="yPosition" access="false" id="yPosition">
+
+                    <label for="xPosition" class="left">
+                        <br></label>
+                    <input type="text" placeholder="PositionX [0...365]" class="left" name="xPosition"id="xPosition">
+
+                    <br>
+                    <button onclick = "sendXYPosition()" type="button" class="button button_register" name="buttonRegister" style="register" id="buttonRegister">
+                        Move Ball<br>
+                    </button>
+                    <script type="application/javascript">
+                        function sendXYPosition() {
+                            let xyPosition = {};
+                            xyPosition.xEst = document.getElementById("xPosition").value;
+                            xyPosition.yEst = document.getElementById("yPosition").value;
+                            fetch('../', {
+                                method: 'POST',
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(xyPosition)
+                            })
+                        }
+                    </script>
+                </div>
+
+                <div class="box_webView">
+                    <h2>Web View</h2>
+                    <table id="TableWebView">
+                        <tr>
+                            <th>ID</th>
+                            <th>Position X Est</th>
+                            <th>Position Y Est</th>
+                            <th>Position X Real</th>
+                            <th>Position Y Real</th>
+                        </tr>
+                        <tr>
+                            <td><span id="rId"></span></td>
+                            <td><span id="rPosXest"></span></td>
+                            <td><span id="rPosYest"></span></td>
+                            <td><span id="rPosXre"></span></td>
+                            <td><span id="rPosYre"></span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="right">
+                <div class="box_visualization">
+                    <h2>Gamemode</h2>
+                    <a href="/gamemode.html">
+                        <canvas id="visualization" style="border:2px solid #000000; background-color: white;" width="310" height="235">
+                            <script type="text/javascript">
+                                // Get the values for the visualization
+                                setInterval(function(){
+                                    fetch('/', {
+                                        method: 'GET',
+                                        headers: {
+                                            'Accept': 'application/json',
+                                        },
+                                    })
+                                    .then(response => response.text())
+                                    .then(text => {
+                                        let data = JSON.parse(text);
+
+                                        // Modify the left-hand-values every second
+                                        if(Math.random() * 100 > 90) {
+                                            document.getElementById("rId").innerHTML = data.id;
+                                            document.getElementById("rPosXest").innerHTML = data.xest;
+                                            document.getElementById("rPosYest").innerHTML = data.yest;
+                                            document.getElementById("rPosXre").innerHTML = data.xreal;
+                                            document.getElementById("rPosYre").innerHTML = data.yreal;
+                                        }
+
+                                        // Set the values for the table on the left side
+                                        document.getElementById('rId').innerHTML = data.id;
+                                        document.getElementById('rPosXest').innerHTML = data.xest;
+                                        document.getElementById('rPosYest').innerHTML = data.yest;
+                                        document.getElementById('rPosXre').innerHTML = data.xreal;
+                                        document.getElementById('rPosYre').innerHTML = data.yreal;
+
+                                        // Canvas configuration
+                                        var c = document.getElementById("visualization");
+                                        var ctx = c.getContext("2d");
+                                        // Make the canvas white again
+                                        ctx.fillStyle = "white";
+                                        ctx.fillRect(0, 0, c.width, c.height);
+                                        // Draw the ball
+                                        ctx.fillStyle = "black";
+                                        ctx.beginPath();
+                                        ctx.arc(data.xreal,data.yreal,15,0,2*Math.PI);
+                                        ctx.fill();
+                                    }
+                                    )
+                                }, 100);
+                            </script>
+                        </canvas>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</h:body>
+</html>

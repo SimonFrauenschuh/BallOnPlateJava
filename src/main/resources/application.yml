@@ -1,17 +1,35 @@
 #Mon Nov 20 15:50:10 UTC 2023
 micronaut:
+  server:
+      # port: 8080
+  ssl:
+    enabled: true
+    key-store:
+      path: classpath:server.p12
+      password: Sisyphos
+      type: PKCS12
   application:
-    name:sisyphos
+    name: sisyphos
+  router:
+    static-resources:
+      default:
+        enabled: true
+        mapping: /**
+        paths: classpath:public
+
 datasources:
   default:
-    dialect: MYSQL
-    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:postgresql://localhost:5432/ballonplateds
+    driverClassName: org.postgresql.Driver
+    username: pi
+    password: 'pi'
+    dialect: POSTGRES
 
 liquibase:
   enabled: true
   datasources:
     default:
-      change-log: 'classpath:db/liquibase-changelog.xml'
+      change-log: 'classpath:db/liquibase-changelog.sql'
 
 endpoints:
   liquibase:

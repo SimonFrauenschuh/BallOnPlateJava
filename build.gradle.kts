@@ -18,15 +18,18 @@ dependencies {
     annotationProcessor("io.micronaut:micronaut-http-validation")
     annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
     annotationProcessor("org.projectlombok:lombok:1.16.20")
+    annotationProcessor("io.micronaut.data:micronaut-data-processor")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("io.micronaut.data:micronaut-data-jdbc")
     implementation("io.micronaut.liquibase:micronaut-liquibase")
     implementation("org.slf4j:jul-to-slf4j:1.7.30")
     implementation("io.micronaut:micronaut-management")
+    implementation("org.json:json:20231013")
     compileOnly("io.micronaut:micronaut-http-client")
     compileOnly("org.projectlombok:lombok:1.16.20")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("org.postgresql:postgresql")
+    runtimeOnly("io.micronaut.sql:micronaut-jdbc-hikari")
     testImplementation("io.micronaut:micronaut-http-client")
 }
 

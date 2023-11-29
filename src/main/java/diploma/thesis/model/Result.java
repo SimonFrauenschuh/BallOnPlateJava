@@ -13,7 +13,8 @@ import lombok.Setter;
 public class Result {
 
     @Id
-    @GeneratedValue(GeneratedValue.Type.SEQUENCE)
+    @GeneratedValue(GeneratedValue.Type.AUTO)
+    @Setter
     @Getter
     private Long id;
 

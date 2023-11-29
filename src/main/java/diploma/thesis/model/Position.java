@@ -5,23 +5,35 @@ import io.micronaut.data.annotation.GeneratedValue;
 import io.micronaut.data.annotation.Id;
 import io.micronaut.data.annotation.MappedEntity;
 import io.micronaut.serde.annotation.Serdeable;
+import lombok.Getter;
+import lombok.Setter;
 
 @Serdeable
 @MappedEntity
 public class Position {
     @Id
-    @GeneratedValue(GeneratedValue.Type.SEQUENCE)
+    @GeneratedValue(GeneratedValue.Type.AUTO)
+    @Setter
+    @Getter
     private int id;
 
     @NonNull
-    private int xEst;
+    @Setter
+    @Getter
+    private int xest;
 
     @NonNull
-    private int yEst;
+    @Setter
+    @Getter
+    private int yest;
 
     @NonNull
-    private int xReal;
+    @Setter
+    @Getter
+    private int xreal;
 
     @NonNull
-    private int yReal;
+    @Setter
+    @Getter
+    private int yreal;
 }
